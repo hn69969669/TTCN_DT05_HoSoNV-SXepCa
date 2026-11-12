@@ -1,0 +1,19 @@
+{% load static %}
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DT05 · Hồ sơ nhân viên và xếp ca</title>
+    <link rel="stylesheet" href="{% static 'lichca/app.css' %}">
+</head>
+<body>
+    <main>
+        <p class="brand">DT05</p>
+        <h1>Hồ sơ nhân viên<br>và xếp ca</h1>
+        <p>Khung ứng dụng đã sẵn sàng. Nhóm tiếp tục xây dựng hồ sơ nhân viên,
+            kiểm tra điều kiện và lịch ca theo tài liệu thiết kế.</p>
+        <a href="{% url 'admin:index' %}">Mở trang quản trị <span aria-hidden="true">→</span></a>
+    </main>
+</body>
+</html>

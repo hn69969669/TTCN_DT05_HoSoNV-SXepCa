@@ -1,0 +1,41 @@
+:root {
+    font-family: "Segoe UI", sans-serif;
+    color: #20312c;
+    background: #f4f3ed;
+}
+body {
+    margin: 0;
+}
+main {
+    max-width: 760px;
+    padding: 80px 28px;
+    margin: auto;
+}
+.brand {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #3a6956;
+}
+h1 {
+    font-size: clamp(36px, 7vw, 64px);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+}
+p {
+    max-width: 560px;
+    font-size: 18px;
+    line-height: 1.65;
+}
+a {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 22px;
+    background: #205341;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+}
+a:hover, a:focus-visible {
+    background: #153d2f;
+    outline-offset: 4px;
+}

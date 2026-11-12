@@ -1,0 +1,27 @@
+# Dữ liệu mẫu và kịch bản nghiệm thu
+
+Dùng [bộ dữ liệu hư cấu](du_lieu_mau.json) làm đầu vào thiết kế và nguồn cho lệnh nạp mẫu khi nhóm viết ứng dụng. Các kết quả dưới đây là **kỳ vọng**, chưa phải kết quả chạy phần mềm. Mỗi ca độc lập bắt đầu từ bộ mẫu gốc, sau đó áp dụng bước chuẩn bị ghi ở dòng tương ứng. Khi demo cuối kỳ, dùng đồng hồ mô phỏng 20/11/2026 cho bộ mẫu hoặc sinh lại toàn bộ ngày ca, hạn giấy và lịch nền theo ngày demo. Giờ hiển thị dùng Europe/Berlin.
+
+**Hiệp nạp theo thứ tự** chi nhánh, vị trí, tài khoản/quan hệ quản lý, nhân viên và nơi được nhận ca, loại chứng từ và yêu cầu theo vị trí, chứng từ, lịch Chủ nhật, ca, phân công, đơn. Dùng mã để tìm lại bản ghi, tạo tài khoản thử với mật khẩu do từng máy tự đặt. CA03 là ca đã công bố trong bộ mẫu nên trình nạp phải tạo nháp, xếp NV04 rồi công bố hoặc nạp toàn bộ ảnh chụp dữ liệu trong một giao dịch đã kiểm ràng buộc. Mã phân công CA03 cố định chỉ để hai bạn đối chiếu bộ mẫu. Khi tái hiện một bài thử dùng database demo có thể khôi phục về đúng ảnh chụp ban đầu.
+
+**Đối chiếu sau khi nạp.** Có 2 chi nhánh, 5 nhân viên, 4 ca, 14 minh chứng và 1 phân công. CA01 cần 2 người và còn trống, CA03 đã công bố có NV04. NV01 được làm ở hai chi nhánh. NV02 hết hạn GIAY_BEP ngày 22/11. NV03 thiếu IFSG_NHAC. NV01 có 52 hàng Chủ nhật năm 2026, gồm 37 ngày làm ngoài các ca ứng dụng và 15 ngày nghỉ. CA04 rơi đúng một trong 15 ngày nghỉ đó. Các nhân viên còn lại chỉ cần lịch nền khi bài thử thực sự phân họ vào Chủ nhật.
+
+| Mã | Chuẩn bị và thao tác | Kết quả mong đợi |
+|---|---|---|
+| T01 | Quản lý CN01 thêm NV01 rồi NV05 vào CA01, tải lại sau mỗi lần. Công bố. | 0/2 → 1/2 → 2/2. Sau công bố, đúng hai người thấy CA01 trong tuần 23/11. |
+| T02 | Thêm NV02 vào CA01. Gia hạn GIAY_BEP bao phủ toàn ca và thử lại. | Lần đầu chặn với ngày 22/11, số người vẫn 0. Lần hai lưu thành 1/2. |
+| T03 | Chọn NV03 cho CA01. Nhập lần hướng dẫn lại đã xác minh, hiệu lực bao phủ 23/11, thử lại. | Lần đầu báo thiếu IFSG_NHAC, lần sau đạt. Chứng nhận ban đầu vẫn có trong hồ sơ. |
+| T04 | Xếp NV01 vào CA01, quản lý CN02 thử xếp người đó vào CA02. | Chặn trùng 12:00–16:00, giữ CA02 trống. Thông báo cho CN02 chỉ nêu xung đột cần biết. |
+| T05 | Tạo ca trước ngày 23/11 từ 18:00 đến 22:00 cho NV01. Ca sau ngày 24/11 làm 4 giờ, bắt đầu lần lượt 08:59 và 09:00. Lặp với thứ tự nhập đảo ngược trên dữ liệu sạch. | 10 giờ 59 phút bị chặn, đúng 11 giờ đạt. Kiểm tra cả ca đứng trước và sau. |
+| T06 | CA01 có 510 phút hiện diện, nghỉ 30 phút. Tăng phút kết thúc thành 17:31. Ở lượt khác dùng hai ca 00:00–04:30 và 15:30–19:01 cùng ngày thường cho NV01, không có nghỉ nội ca. | 480 phút đạt. 481 phút bị chặn ở cả hai cách tạo lịch, kể cả khi hai ca cách nhau đúng 11 giờ. |
+| T07 | Gán NV01 vào CA04. Thử lại với một ngày làm nền đổi thành nghỉ (tăng quỹ từ 15 lên 16). Ở lượt thứ ba bỏ một hàng nền. | 15 xuống 14 bị chặn. 16 xuống 15 đạt. Lịch nền thiếu trả NEED_DATA và chỉ ra năm/ngày cần bổ sung. |
+| T08 | Khi CA01 nháp có NV01, mở lịch cá nhân bằng tài khoản NV01. Hoàn tất T01, xem lại. Đăng nhập NV02 rồi thử dùng tham số nhân viên NV01. | Lần đầu ẩn CA01, sau công bố NV01 thấy ca. NV02 chỉ nhận lịch của chính mình. |
+| T09 | Hoàn tất T01. NV01 dùng mã phân công của mình và mã DEMO-CA03-NV04 để gửi đơn. Quản lý CN01 duyệt rồi lặp thao tác. | Khi chờ, lịch cũ vẫn có hiệu lực. Sau duyệt CA01 có NV04 và NV05, CA03 có NV01. Lần hai không đổi ngược, lịch sử có người và lúc duyệt. |
+| T10 | Gửi đơn như T09, sau đó đặt giấy GIAY_BEP của NV04 hết hạn 22/11 trước khi duyệt. Tiếp đó quản lý từ chối và nhập lý do. | Duyệt thất bại, cả hai lịch giữ nguyên, đơn vẫn chờ. Từ chối chuyển REJECTED, nhân viên thấy lý do. |
+| T11 | Quản lý CN02 thử sửa hồ sơ NV01 thuộc CN01 hoặc công bố CA01 bằng đường dẫn trực tiếp. Ở CN01 ngừng hoạt động NV05 rồi thử xếp. | Hai thao tác sai phạm vi bị từ chối phía máy chủ. NV05 bị chặn vì trạng thái nhân viên. |
+| T12 | Tạo ca có giờ kết thúc trước bắt đầu, có giờ nghỉ thiếu một đầu hoặc nhu cầu bằng 0. Công bố CA01 ở 1/2 người. Thử thêm người vào ca nháp đã đủ hai chỗ. | Dữ liệu ca sai bị trả về đúng trường. Ca thiếu người vẫn nháp, ca đủ chỗ giữ nguyên số phân công. |
+| T13 | Tạo ca 23/11 22:00–24/11 06:00, nghỉ 23:45–00:15. Cấp giấy hiệu lực hết 23/11. Sau đó gia hạn thêm một ngày. Thử thêm một ca khác kết thúc đúng 00:00 với giấy hết 23/11. | Trường hợp đầu chặn vì làm sang ngày 24. Sau gia hạn đạt, số phút làm thực là 105 ngày 23 và 345 ngày 24. Ca kết thúc đúng nửa đêm xét ngày cuối thực sự làm là 23. |
+| T14 | A. CA01 nháp đã có NV01. Trong hai phiên, thử đồng thời thêm NV04 và NV05 vào chỗ cuối. B. Khôi phục mẫu, gửi một đơn hợp lệ như T09 rồi hai phiên cùng duyệt. C. Trong kiểm thử giao dịch, mô phỏng lỗi sau lần ghi phân công thứ nhất. | A. Có đúng hai phân công sau commit, một thao tác bị chặn. B. Chỉ một lần đổi có hiệu lực. C. Cả hai chủ sở hữu và trạng thái đơn quay về trước thao tác lỗi. |
+| T15 | NV01 thử gửi đơn cho hai ca của người khác hoặc dùng ca nháp. Sau T09, thử duyệt một đơn chờ khác có chung phân công đã đổi chủ kể từ lúc gửi. | Chặn gửi sai quyền/trạng thái. Đơn cũ báo lịch đã thay đổi, giữ người đang thực sự nhận ca. |
+
+**Ghi nhận khi có sản phẩm.** Mỗi kết quả M5 gồm mã ca thử, Git commit, máy/phiên bản SQL Server, thời điểm thử, người chạy, kết quả thực tế, đạt/trượt và liên kết bằng chứng. Khi có lỗi, ghi bước tái hiện, người sửa, phiên bản sửa và kết quả chạy lại trên máy còn lại. Ưu tiên lỗi làm lộ hồ sơ, xếp người không đủ điều kiện, công bố sai hoặc chỉ đổi được một trong hai lịch.
