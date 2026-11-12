@@ -24,6 +24,15 @@ Database local là DT05_Dev, instance localhost\HIEP, Windows Authentication và
 
 ## Cài trên máy Chung hoặc máy mới
 
+Có thể dùng [script tự tạo database và nhập dữ liệu mẫu](scripts/HUONG_DAN_IMPORT.md).
+Sau khi cài Python/SQL Server/ODBC, chạy tại thư mục dự án:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\import_database.ps1 -Server '.\SQLEXPRESS'
+```
+
+Thay tên server theo máy nhận. Các bước thủ công tương đương nằm bên dưới.
+
 1. Cài Python 3.13, SQL Server và ODBC Driver 17 hoặc 18.
 2. Clone repo rồi mở PowerShell tại thư mục có manage.py.
 3. Chạy:

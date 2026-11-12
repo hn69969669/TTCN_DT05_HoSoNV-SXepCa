@@ -2,7 +2,7 @@
 
 **Kết quả cần đạt ở bước kế tiếp** là hai máy chạy được cùng phiên bản, có cùng bộ dữ liệu thử và quản lý mở được CA01 để xem hồ sơ của người dự kiến nhận ca. Sau đó nhóm nối thao tác chọn NV02 → nhận lý do giấy hết hạn → chọn NV01 → lưu được phân công đầu tiên.
 
-Phiên bản khởi tạo đã có Django, SQL Server, 13 models nghiệp vụ và migration. Database trên máy Hiệp có một tài khoản quản trị. Phần nạp dữ liệu JSON, đăng ký bảng nghiệp vụ trong Admin, màn hình nhân sự và dịch vụ phân ca bên dưới là công việc nhóm cần viết tiếp. Trạng thái này được ghi ngày 12/11/2026.
+Phiên bản hiện tại đã có Django, SQL Server, 13 models nghiệp vụ, migration và lệnh seed_demo. Database trên máy Hiệp có một tài khoản quản trị. Hiệp kiểm tra lệnh nạp trên hai máy. Chung tiếp tục phần đăng ký bảng nghiệp vụ trong Admin, màn hình nhân sự và dịch vụ phân ca cùng Hiệp. Trạng thái này được ghi ngày 12/11/2026.
 
 ## 1. Đồng bộ hai máy trước khi chia code
 
@@ -33,9 +33,9 @@ Dừng máy chủ bằng Ctrl+C sau khi thử. Ghi commit, kết quả và lỗi
 
 Các phần có thể triển khai trước gồm danh mục, nhập hồ sơ, hiển thị dữ liệu và form ca theo cấu trúc hiện có. Đối với ngưỡng giờ, Chủ nhật, công bố và đổi ca, lưu quyết định Q1–Q6 cạnh mã yêu cầu chịu ảnh hưởng. Nếu chưa nhận phản hồi, ghi rõ quy tắc demo đang áp dụng khi trình diễn.
 
-## 3. Hiệp viết lệnh nạp bộ mẫu
+## 3. Hiệp kiểm tra lệnh nạp bộ mẫu
 
-**Tệp cần tạo** là lichca/management/commands/seed_demo.py và các tệp __init__.py của hai thư mục mới. Lệnh đọc [du_lieu_mau.json](du_lieu_mau.json). Giao diện lệnh đề xuất dưới đây sẽ dùng sau khi Hiệp viết xong:
+Lệnh đã có trong lichca/management/commands/seed_demo.py, đọc [du_lieu_mau.json](du_lieu_mau.json). Thực hiện theo [hướng dẫn import trên máy mới](../scripts/HUONG_DAN_IMPORT.md), sau đó chạy:
 
 ```powershell
 .\.venv\Scripts\python.exe manage.py seed_demo --manager TEN_DANG_NHAP_LOCAL
