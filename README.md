@@ -61,6 +61,8 @@ Khi triển khai máy chủ dùng chung, cấu hình xác thực và chứng ch�
 
 ## Nền tảng để phát triển
 
+Bắt đầu từ [việc tiếp theo của Hiệp và Chung](HO_SO_DT05/06_BUOC_TIEP_THEO.md).
+
 - [Bộ kế hoạch, yêu cầu và thiết kế](HO_SO_DT05/README.md)
 - [Lộ trình 18 buổi](LO_TRINH_DT05.md)
 - [Hướng dẫn làm việc và chuẩn bị M2](BAT_DAU_DT05.md)
