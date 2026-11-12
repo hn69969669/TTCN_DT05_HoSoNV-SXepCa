@@ -1,0 +1,34 @@
+flowchart TD
+  a(["Bắt đầu"])
+  b["Quản lý: cập nhật hồ sơ nhân viên<br/>và yêu cầu minh chứng theo vị trí"]
+  c["Quản lý: tạo ca nháp<br/>Chi nhánh · vị trí · giờ · số người cần"]
+  d["Quản lý: chọn nhân viên<br/>Hệ thống kiểm tra trước khi lưu"]
+  e{"Hợp lệ và còn chỗ?"}
+  f["Hiển thị lý do; giữ nguyên phân công<br/>Quản lý bổ sung dữ liệu hoặc chọn lại"]
+  g["Lưu phân công<br/>Cập nhật số đã xếp / số cần"]
+  h{"Đủ số người?"}
+  i["Quản lý: yêu cầu công bố<br/>Hệ thống kiểm tra lại toàn ca"]
+  j{"Toàn ca đạt?"}
+  k["Công bố lịch<br/>Nhân viên xem lịch cá nhân"]
+  l{"Có nhu cầu đổi ca?"}
+  m["Nhân viên: gửi đơn đổi hai ca<br/>Quản lý: duyệt hoặc từ chối<br/>Theo quy trình chi tiết ở Hình 3"]
+  n["Nhân viên xem lịch và kết quả xử lý"]
+  o(["Kết thúc lượt xử lý"])
+  a --> b
+  b --> c
+  c --> d
+  d --> e
+  e -->|Không| f
+  f -->|Sửa / chọn lại| d
+  e -->|Có| g
+  g --> h
+  h -->|Chưa đủ| d
+  h -->|Đủ| i
+  i --> j
+  j -->|Chưa đạt| f
+  j -->|Đạt| k
+  k --> l
+  l -->|Có| m
+  l -->|Không| o
+  m --> n
+  n --> o

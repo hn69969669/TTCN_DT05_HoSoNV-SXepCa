@@ -1,0 +1,36 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam ArrowColor #3F5264
+skinparam defaultTextAlignment center
+skinparam roundCorner 0
+skinparam monochrome false
+skinparam usecaseBackgroundColor #EFF5F8
+skinparam usecaseBorderColor #385B70
+skinparam rectangleBorderColor #385B70
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+left to right direction
+actor "Quản lý chi nhánh" as QL
+rectangle "Hồ sơ nhân viên và xếp ca — DT05" {
+  usecase "Cập nhật hồ sơ nhân viên" as PROFILE
+  usecase "Cập nhật giấy tờ và đào tạo" as EV
+  usecase "Xem lịch chi nhánh" as VIEW
+  usecase "Tạo ca làm việc" as CREATE
+  usecase "Bỏ phân công nhân viên" as REMOVE
+  usecase "Phân công nhân viên" as ASSIGN
+  usecase "Công bố ca làm việc" as PUB
+  usecase "Kiểm tra điều kiện\nphân công" as CHECK
+}
+QL -- PROFILE
+QL -- EV
+QL -- VIEW
+QL -- CREATE
+QL -- REMOVE
+QL -- ASSIGN
+QL -- PUB
+ASSIGN ..> CHECK : <<include>>
+PUB ..> CHECK : <<include>>
+@enduml

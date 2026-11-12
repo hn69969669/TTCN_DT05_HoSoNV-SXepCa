@@ -1,0 +1,36 @@
+flowchart TD
+  a(["Nhân viên chọn phân công của mình<br/>và nhập mã phân công đối tác"])
+  b["Kiểm quyền sở hữu, hai người / hai ca<br/>khác nhau, cùng chi nhánh, ca tương lai<br/>đã công bố và không trùng cặp đơn chờ"]
+  c{"Yêu cầu hợp lệ?"}
+  d["Thông báo lỗi<br/>Không tạo đơn, giữ nguyên lịch"]
+  e["Lưu đơn PENDING và hai chủ sở hữu gốc<br/>Lịch hiện tại chưa thay đổi"]
+  f["Quản lý mở đơn, chọn quyết định<br/>Hệ thống kiểm quyền và đọc lại đơn"]
+  g{"Đơn còn PENDING?"}
+  h["Trả kết quả đã lưu<br/>Không thực hiện lần hai"]
+  i{"Quyết định?"}
+  j["Nhập lý do; lưu REJECTED<br/>người và thời điểm; giữ nguyên lịch"]
+  k["Trong cùng giao dịch: kiểm chủ sở hữu,<br/>ca chưa bắt đầu và dựng lịch dự kiến<br/>sau hoán đổi cho cả hai người"]
+  l{"Cả hai đạt điều kiện<br/>trên dữ liệu mới nhất?"}
+  m["Giữ đơn PENDING và lịch cũ<br/>Trả lý do; quản lý có thể từ chối"]
+  n["Đổi hai phân công và lưu APPROVED<br/>người, thời điểm trong một giao dịch<br/>Lỗi khi ghi: rollback toàn bộ"]
+  o["Hai nhân viên xem kết quả<br/>và lịch cá nhân sau xử lý"]
+  p(["Kết thúc lượt xử lý"])
+  a --> b
+  b --> c
+  c -->|Không| d
+  d --> p
+  c -->|Có| e
+  e --> f
+  f --> g
+  g -->|Đã xử lý| h
+  h --> o
+  g -->|Còn chờ| i
+  i -->|Từ chối| j
+  i -->|Duyệt| k
+  k --> l
+  l -->|Không| m
+  m --> p
+  l -->|Có| n
+  j --> o
+  n -->|Ghi thành công| o
+  o --> p

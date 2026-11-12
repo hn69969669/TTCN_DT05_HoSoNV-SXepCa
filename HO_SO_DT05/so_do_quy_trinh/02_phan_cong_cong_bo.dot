@@ -1,0 +1,35 @@
+digraph G {
+      graph [rankdir=TB, bgcolor="white", pad=0.3, nodesep=0.42, ranksep=0.46,
+        labelloc=t, label="PHÂN CÔNG VÀ CÔNG BỐ CA\nQuản lý chi nhánh và hệ thống · YC03–YC09 · Quy trình đề xuất", fontname="Arial", fontsize=20];
+      node [shape=box, style="rounded,filled", fillcolor="#eef4fc", color="#6885aa",
+        fontname="Arial", fontsize=13, fontcolor="#172c44", margin="0.20,0.12", penwidth=1.2];
+      edge [color="#60758c", arrowsize=0.65, fontname="Arial", fontsize=11, fontcolor="#334155"];
+      a [label="Quản lý chọn nhân viên và ca nháp", shape=oval, fillcolor="#e2e8f0", color="#64748b"];
+b [label="Hệ thống kiểm tra quyền và dữ liệu\nĐọc lại dữ liệu trong giao dịch"];
+c [label="Đúng quyền, ca nháp\nvà còn chỗ?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+d [label="Đánh giá nhân viên trên lịch dự kiến\n• Hoạt động, được làm tại chi nhánh\n• Đủ hồ sơ / đào tạo, hiệu lực suốt ca\n• Không trùng lịch ở mọi chi nhánh\n• Đạt giờ làm, nghỉ và quỹ Chủ nhật"];
+e [label="Kết quả đánh giá?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+f [label="BLOCKED / NEED_DATA\nNêu lý do hoặc dữ liệu cần bổ sung\nGiữ nguyên phân công", shape=box, fillcolor="#fff0ee", color="#c56557"];
+g [label="OK: lưu phân công và kết thúc giao dịch\nĐọc lại số đã xếp / số cần", shape=box, fillcolor="#e5f5ee", color="#3f9072"];
+h [label="Quản lý yêu cầu công bố ca"];
+i [label="Trong giao dịch mới: đọc lại quyền,\ntrạng thái, số người và điều kiện\ncủa toàn bộ phân công"];
+j [label="Đúng số người\nvà mọi phân công đạt?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+k [label="Giữ ca DRAFT (nháp)\nThông báo nội dung cần khắc phục", shape=box, fillcolor="#fff0ee", color="#c56557"];
+l [label="Lưu PUBLISHED, người và giờ công bố\nNhân viên xem được ca của mình", shape=box, fillcolor="#e5f5ee", color="#3f9072"];
+m [label="Kết thúc lượt xử lý", shape=oval, fillcolor="#e2e8f0", color="#64748b"];
+      a -> b;
+b -> c;
+c -> d [label="Có"];
+c -> f [label="Không"];
+d -> e;
+e -> f [label="Bị chặn / thiếu dữ liệu"];
+e -> g [label="OK"];
+f -> m;
+g -> h [label="Khi đã chuẩn bị đủ người"];
+h -> i;
+i -> j;
+j -> k [label="Không"];
+j -> l [label="Có"];
+k -> m;
+l -> m;
+    }

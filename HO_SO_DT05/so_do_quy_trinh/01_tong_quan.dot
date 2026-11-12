@@ -1,0 +1,40 @@
+digraph G {
+      graph [rankdir=TB, bgcolor="white", pad=0.3, nodesep=0.42, ranksep=0.46,
+        labelloc=t, label="QUY TRÌNH TỔNG QUAN\nHồ sơ nhân viên và xếp ca · Nhóm N01 · Quy trình đề xuất", fontname="Arial", fontsize=20];
+      node [shape=box, style="rounded,filled", fillcolor="#eef4fc", color="#6885aa",
+        fontname="Arial", fontsize=13, fontcolor="#172c44", margin="0.20,0.12", penwidth=1.2];
+      edge [color="#60758c", arrowsize=0.65, fontname="Arial", fontsize=11, fontcolor="#334155"];
+      a [label="Bắt đầu", shape=oval, fillcolor="#e2e8f0", color="#64748b"];
+b [label="Quản lý: cập nhật hồ sơ nhân viên\nvà yêu cầu minh chứng theo vị trí"];
+c [label="Quản lý: tạo ca nháp\nChi nhánh · vị trí · giờ · số người cần"];
+d [label="Quản lý: chọn nhân viên\nHệ thống kiểm tra trước khi lưu"];
+e [label="Hợp lệ và còn chỗ?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+f [label="Hiển thị lý do; giữ nguyên phân công\nQuản lý bổ sung dữ liệu hoặc chọn lại", shape=box, fillcolor="#fff0ee", color="#c56557"];
+g [label="Lưu phân công\nCập nhật số đã xếp / số cần"];
+h [label="Đủ số người?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+i [label="Quản lý: yêu cầu công bố\nHệ thống kiểm tra lại toàn ca"];
+j [label="Toàn ca đạt?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+k [label="Công bố lịch\nNhân viên xem lịch cá nhân", shape=box, fillcolor="#e5f5ee", color="#3f9072"];
+l [label="Có nhu cầu đổi ca?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+m [label="Nhân viên: gửi đơn đổi hai ca\nQuản lý: duyệt hoặc từ chối\nTheo quy trình chi tiết ở Hình 3"];
+n [label="Nhân viên xem lịch và kết quả xử lý"];
+o [label="Kết thúc lượt xử lý", shape=oval, fillcolor="#e2e8f0", color="#64748b"];
+      a -> b;
+b -> c;
+c -> d;
+d -> e;
+e -> f [label="Không"];
+f -> d [label="Sửa / chọn lại"];
+e -> g [label="Có"];
+g -> h;
+h -> d [label="Chưa đủ"];
+h -> i [label="Đủ"];
+i -> j;
+j -> f [label="Chưa đạt"];
+j -> k [label="Đạt"];
+k -> l;
+l -> m [label="Có"];
+l -> o [label="Không"];
+m -> n;
+n -> o;
+    }

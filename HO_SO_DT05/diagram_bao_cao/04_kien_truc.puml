@@ -1,0 +1,34 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam ArrowColor #3F5264
+skinparam defaultTextAlignment center
+skinparam roundCorner 0
+skinparam monochrome false
+skinparam usecaseBackgroundColor #EFF5F8
+skinparam usecaseBorderColor #385B70
+skinparam rectangleBorderColor #385B70
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+top to bottom direction
+actor "Người dùng" as U
+rectangle "Trình duyệt" as Browser
+package "Ứng dụng Django · thiết kế đề xuất" {
+  component "Views / Forms\nPhiên đăng nhập · CSRF · quyền chi nhánh" as Web
+  component "Truy vấn theo quyền\nHồ sơ · lịch · trạng thái đơn" as Read
+  component "Dịch vụ ghi lịch\nPhân công · công bố · đổi ca" as Write
+  component "Quy tắc nghiệp vụ\nHồ sơ và lịch dự kiến" as Rule
+  component "Django ORM" as ORM
+}
+database "Microsoft SQL Server" as DB
+U -- Browser
+Browser --> Web : HTTP / HTML
+Web --> Read : đọc
+Web --> Write : ghi
+Write --> Rule : đánh giá
+Read --> ORM
+Write --> ORM : giao dịch
+ORM --> DB : mssql-django / ODBC
+@enduml

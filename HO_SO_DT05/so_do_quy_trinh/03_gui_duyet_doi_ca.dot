@@ -1,0 +1,42 @@
+digraph G {
+      graph [rankdir=TB, bgcolor="white", pad=0.3, nodesep=0.42, ranksep=0.46,
+        labelloc=t, label="GỬI VÀ DUYỆT ĐỔI CA\nNhân viên · quản lý chi nhánh · hệ thống · YC10–YC11 · Đề xuất", fontname="Arial", fontsize=20];
+      node [shape=box, style="rounded,filled", fillcolor="#eef4fc", color="#6885aa",
+        fontname="Arial", fontsize=13, fontcolor="#172c44", margin="0.20,0.12", penwidth=1.2];
+      edge [color="#60758c", arrowsize=0.65, fontname="Arial", fontsize=11, fontcolor="#334155"];
+      a [label="Nhân viên chọn phân công của mình\nvà nhập mã phân công đối tác", shape=oval, fillcolor="#e2e8f0", color="#64748b"];
+b [label="Kiểm quyền sở hữu, hai người / hai ca\nkhác nhau, cùng chi nhánh, ca tương lai\nđã công bố và không trùng cặp đơn chờ"];
+c [label="Yêu cầu hợp lệ?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+d [label="Thông báo lỗi\nKhông tạo đơn, giữ nguyên lịch", shape=box, fillcolor="#fff0ee", color="#c56557"];
+e [label="Lưu đơn PENDING và hai chủ sở hữu gốc\nLịch hiện tại chưa thay đổi"];
+f [label="Quản lý mở đơn, chọn quyết định\nHệ thống kiểm quyền và đọc lại đơn"];
+g [label="Đơn còn PENDING?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+h [label="Trả kết quả đã lưu\nKhông thực hiện lần hai"];
+i [label="Quyết định?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+j [label="Nhập lý do; lưu REJECTED\nngười và thời điểm; giữ nguyên lịch", shape=box, fillcolor="#fff0ee", color="#c56557"];
+k [label="Trong cùng giao dịch: kiểm chủ sở hữu,\nca chưa bắt đầu và dựng lịch dự kiến\nsau hoán đổi cho cả hai người"];
+l [label="Cả hai đạt điều kiện\ntrên dữ liệu mới nhất?", shape=diamond, fillcolor="#fff4d6", color="#bd831b", margin="0.14,0.08"];
+m [label="Giữ đơn PENDING và lịch cũ\nTrả lý do; quản lý có thể từ chối", shape=box, fillcolor="#fff0ee", color="#c56557"];
+n [label="Đổi hai phân công và lưu APPROVED\nngười, thời điểm trong một giao dịch\nLỗi khi ghi: rollback toàn bộ", shape=box, fillcolor="#e5f5ee", color="#3f9072"];
+o [label="Hai nhân viên xem kết quả\nvà lịch cá nhân sau xử lý"];
+p [label="Kết thúc lượt xử lý", shape=oval, fillcolor="#e2e8f0", color="#64748b"];
+      a -> b;
+b -> c;
+c -> d [label="Không"];
+d -> p;
+c -> e [label="Có"];
+e -> f;
+f -> g;
+g -> h [label="Đã xử lý"];
+h -> o;
+g -> i [label="Còn chờ"];
+i -> j [label="Từ chối"];
+i -> k [label="Duyệt"];
+k -> l;
+l -> m [label="Không"];
+m -> p;
+l -> n [label="Có"];
+j -> o;
+n -> o [label="Ghi thành công"];
+o -> p;
+    }

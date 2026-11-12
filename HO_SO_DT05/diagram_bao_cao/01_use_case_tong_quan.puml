@@ -1,0 +1,43 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam ArrowColor #3F5264
+skinparam defaultTextAlignment center
+skinparam roundCorner 0
+skinparam monochrome false
+skinparam usecaseBackgroundColor #EFF5F8
+skinparam usecaseBorderColor #385B70
+skinparam rectangleBorderColor #385B70
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+left to right direction
+actor "Quản lý chi nhánh" as QL
+actor "Nhân viên" as NV
+actor "Quản trị viên kỹ thuật" as QT
+rectangle "Hồ sơ nhân viên và xếp ca — DT05" {
+  usecase "Quản lý hồ sơ nhân viên" as PROFILE
+  usecase "Xếp ca làm việc" as SHIFT
+  usecase "Xử lý đề nghị đổi ca" as REVIEW
+  usecase "Đăng nhập hệ thống" as LOGIN
+  usecase "Xem lịch cá nhân" as MINE
+  usecase "Gửi đề nghị đổi ca" as SWAP
+  usecase "Xem kết quả đổi ca" as RESULT
+  usecase "Tạo tài khoản" as ACC
+  usecase "Phân vai tài khoản" as ROLE
+  usecase "Cấu hình danh mục" as CAT
+}
+QL -- PROFILE
+QL -- SHIFT
+QL -- REVIEW
+QL -- LOGIN
+NV -- LOGIN
+NV -- MINE
+NV -- SWAP
+NV -- RESULT
+QT -- LOGIN
+QT -- ACC
+QT -- ROLE
+QT -- CAT
+@enduml

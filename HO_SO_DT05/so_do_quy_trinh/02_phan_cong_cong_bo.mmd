@@ -1,0 +1,29 @@
+flowchart TD
+  a(["Quản lý chọn nhân viên và ca nháp"])
+  b["Hệ thống kiểm tra quyền và dữ liệu<br/>Đọc lại dữ liệu trong giao dịch"]
+  c{"Đúng quyền, ca nháp<br/>và còn chỗ?"}
+  d["Đánh giá nhân viên trên lịch dự kiến<br/>• Hoạt động, được làm tại chi nhánh<br/>• Đủ hồ sơ / đào tạo, hiệu lực suốt ca<br/>• Không trùng lịch ở mọi chi nhánh<br/>• Đạt giờ làm, nghỉ và quỹ Chủ nhật"]
+  e{"Kết quả đánh giá?"}
+  f["BLOCKED / NEED_DATA<br/>Nêu lý do hoặc dữ liệu cần bổ sung<br/>Giữ nguyên phân công"]
+  g["OK: lưu phân công và kết thúc giao dịch<br/>Đọc lại số đã xếp / số cần"]
+  h["Quản lý yêu cầu công bố ca"]
+  i["Trong giao dịch mới: đọc lại quyền,<br/>trạng thái, số người và điều kiện<br/>của toàn bộ phân công"]
+  j{"Đúng số người<br/>và mọi phân công đạt?"}
+  k["Giữ ca DRAFT (nháp)<br/>Thông báo nội dung cần khắc phục"]
+  l["Lưu PUBLISHED, người và giờ công bố<br/>Nhân viên xem được ca của mình"]
+  m(["Kết thúc lượt xử lý"])
+  a --> b
+  b --> c
+  c -->|Có| d
+  c -->|Không| f
+  d --> e
+  e -->|Bị chặn / thiếu dữ liệu| f
+  e -->|OK| g
+  f --> m
+  g -->|Khi đã chuẩn bị đủ người| h
+  h --> i
+  i --> j
+  j -->|Không| k
+  j -->|Có| l
+  k --> m
+  l --> m
