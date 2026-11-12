@@ -6,57 +6,88 @@ skinparam shadowing false
 skinparam ArrowColor #3F5264
 skinparam defaultTextAlignment center
 skinparam roundCorner 0
-skinparam monochrome false
 skinparam usecaseBackgroundColor #EFF5F8
 skinparam usecaseBorderColor #385B70
 skinparam rectangleBorderColor #385B70
 skinparam componentStyle rectangle
 skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
 hide circle
 hide methods
 entity "User\n(tài khoản Django)" as U {
   * id : PK
+  --
+  username : UK
 }
 entity Branch {
   * id : PK
+  --
   code : UK
+  name
 }
 entity ManagerBranch {
   * id : PK
+  --
   user_id : FK
   branch_id : FK
+  --
+  UK(user_id, branch_id)
 }
 entity Employee {
   * id : PK
+  --
   code : UK
+  display_name
   home_branch_id : FK
   user_id : FK, NULL
+  started_on : date
+  active : bool
+  --
+  UK(user_id) khi khác NULL
 }
 entity EmployeeBranch {
   * id : PK
+  --
   employee_id : FK
   branch_id : FK
+  --
+  UK(employee_id, branch_id)
 }
 entity Evidence {
   * id : PK
+  --
   employee_id : FK
   evidence_type_id : FK
-  verified_by_id : FK
-  valid_from / valid_until
+  issued_on : date
+  valid_from : date
+  valid_until : date, NULL
+  reference
+  verified_by_id : FK, NOT NULL
 }
 entity EvidenceType {
   * id : PK
+  --
   code : UK
-  category
+  name
+  category : DOCUMENT / TRAINING
+  expiry_required : bool
 }
 entity PositionRequirement {
   * id : PK
+  --
   position_id : FK
   evidence_type_id : FK
+  --
+  UK(position_id, evidence_type_id)
 }
 entity Position {
   * id : PK
+  --
   code : UK
+  name
 }
 U ||--o{ ManagerBranch
 Branch ||--o{ ManagerBranch

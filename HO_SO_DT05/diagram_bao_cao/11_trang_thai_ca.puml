@@ -1,0 +1,34 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam ArrowColor #3F5264
+skinparam defaultTextAlignment center
+skinparam roundCorner 0
+skinparam usecaseBackgroundColor #EFF5F8
+skinparam usecaseBorderColor #385B70
+skinparam rectangleBorderColor #385B70
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
+left to right direction
+hide empty description
+state "DRAFT\nCa nháp" as DRAFT
+state "PUBLISHED\nCa đã công bố" as PUBLISHED
+[*] --> DRAFT : Tạo ca hợp lệ
+DRAFT --> DRAFT : Thêm / bỏ người hoặc sửa ca\n[đạt điều kiện áp dụng] / lưu thay đổi
+DRAFT --> DRAFT : Yêu cầu công bố\n[chưa đủ người hoặc có lỗi] / trả lý do
+DRAFT --> PUBLISHED : Công bố [đúng số người, mọi phân công đạt]\n/ lưu người và published_at
+PUBLISHED --> PUBLISHED : Duyệt đổi ca [cả hai người đạt]\n/ đổi người trong cùng giao dịch
+PUBLISHED --> PUBLISHED : Công bố lặp / trả trạng thái đã có
+note bottom of PUBLISHED
+  Cố định giờ, vị trí và nhu cầu.
+  Khi ca đã qua, status vẫn là PUBLISHED.
+  Không có bước hủy công bố hoặc trạng thái CANCELLED
+  trong phạm vi hiện tại.
+end note
+@enduml

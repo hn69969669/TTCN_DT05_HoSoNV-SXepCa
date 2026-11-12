@@ -13,6 +13,33 @@ from dotenv import dotenv_values, load_dotenv, set_key
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def resolve_manager(username=None):
+    """Use a local account, or create the first admin interactively."""
+    from django.contrib.auth import get_user_model
+    from django.core.management import call_command, CommandError
+
+    users = get_user_model().objects
+    if username:
+        if not users.filter(username=username, is_active=True).exists():
+            raise CommandError(f"Active manager '{username}' not found. Run createsuperuser first.")
+        return username
+    admins = list(users.filter(is_superuser=True, is_active=True).values_list("username", flat=True))
+    if len(admins) == 1:
+        print(f"Using local administrator '{admins[0]}' for sample data.")
+        return admins[0]
+    if not sys.stdin.isatty():
+        raise CommandError("Seed needs --manager with an existing active username, or an interactive terminal to create/select one.")
+    if admins:
+        print("Multiple administrators found. Enter the local username to use for sample data.")
+        username = input("Manager username: ").strip()
+        if not username:
+            raise CommandError("Manager username cannot be empty. Rerun with --manager USERNAME.")
+        return resolve_manager(username)
+    print("No active administrator found. Create a local administrator to seed sample data.")
+    call_command("createsuperuser", interactive=True)
+    return resolve_manager()
+
+
 def odbc_value(value):
     return "{" + value.replace("}", "}}") + "}"
 
@@ -22,14 +49,21 @@ def main():
     parser.add_argument("--server")
     parser.add_argument("--database")
     parser.add_argument("--driver")
-    parser.add_argument("--seed-demo", action="store_true")
+    seed_options = parser.add_mutually_exclusive_group()
+    seed_options.add_argument("--seed-demo", dest="seed_demo", action="store_true", help="Seed fictional data (default).")
+    seed_options.add_argument("--no-seed-demo", dest="seed_demo", action="store_false", help="Only create database and apply migrations.")
+    parser.set_defaults(seed_demo=True)
     parser.add_argument("--manager")
+    parser.add_argument("--basic-demo", action="store_true", help="Use the original small acceptance dataset instead of the full demo.")
     args = parser.parse_args()
-    if args.seed_demo and not args.manager:
-        parser.error("--seed-demo requires --manager with an existing local username.")
+    if not args.seed_demo and args.manager:
+        parser.error("--manager cannot be used with --no-seed-demo.")
+    if not args.seed_demo and args.basic_demo:
+        parser.error("--basic-demo cannot be used with --no-seed-demo.")
 
     env_path = ROOT / ".env"
-    config = {**dotenv_values(ROOT / ".env.example"), **dotenv_values(env_path)}
+    local_config = dotenv_values(env_path)
+    config = {**dotenv_values(ROOT / ".env.example"), **local_config}
     # Explicit parameters override environment variables, which override the local file.
     for key in config:
         config[key] = os.environ.get(key, config[key])
@@ -81,7 +115,8 @@ def main():
         connection.close()
 
     for key, value in config.items():
-        set_key(str(env_path), key, value or "")
+        if local_config.get(key) != (value or ""):
+            set_key(str(env_path), key, value or "")
         os.environ[key] = value or ""
     load_dotenv(env_path)
     sys.path.insert(0, str(ROOT))
@@ -93,7 +128,11 @@ def main():
     call_command("migrate", interactive=False)
     call_command("check", databases=["default"])
     if args.seed_demo:
-        call_command("seed_demo", manager=args.manager)
+        if args.basic_demo:
+            call_command("seed_demo", manager=resolve_manager(args.manager))
+        else:
+            call_command("seed_demo", full=True, manager=args.manager)
+            call_command("check_demo_data", manager=args.manager)
     print("Database setup completed. Local configuration is saved in .env.")
 
 

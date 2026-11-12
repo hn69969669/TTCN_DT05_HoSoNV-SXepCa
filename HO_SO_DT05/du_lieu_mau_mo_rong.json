@@ -1,0 +1,630 @@
+{
+  "version": "1.0-full",
+  "notes": "Du lieu hu cau mo rong; giu nguyen kich ban CA01-CA04 va NV01-NV05. Lich su doi da duyet duoc nap nhu anh chup, khong phai goi dich vu duyet.",
+  "branches": [
+    {
+      "code": "CN03",
+      "name": "Chi nhánh mẫu 3"
+    },
+    {
+      "code": "CN04",
+      "name": "Chi nhánh mẫu 4"
+    },
+    {
+      "code": "CN05",
+      "name": "Chi nhánh mẫu 5"
+    }
+  ],
+  "positions": [
+    {
+      "code": "PHUC_VU",
+      "name": "Phục vụ"
+    },
+    {
+      "code": "THU_NGAN",
+      "name": "Thu ngân"
+    },
+    {
+      "code": "PHA_CHE",
+      "name": "Pha chế"
+    },
+    {
+      "code": "KHO",
+      "name": "Kho"
+    }
+  ],
+  "managers": [
+    {
+      "user": "quanly03",
+      "branches": [
+        "CN03"
+      ]
+    },
+    {
+      "user": "quanly04",
+      "branches": [
+        "CN04"
+      ]
+    },
+    {
+      "user": "quanly05",
+      "branches": [
+        "CN05"
+      ]
+    }
+  ],
+  "employees": [
+    {
+      "code": "NV06",
+      "display_name": "Nhân viên mẫu 6",
+      "user": "demo_nv06",
+      "home_branch": "CN03",
+      "branches": [
+        "CN03",
+        "CN04"
+      ],
+      "started_on": "2023-11-10",
+      "active": true
+    },
+    {
+      "code": "NV07",
+      "display_name": "Nhân viên mẫu 7",
+      "user": "demo_nv07",
+      "home_branch": "CN03",
+      "branches": [
+        "CN03",
+        "CN04"
+      ],
+      "started_on": "2023-11-10",
+      "active": true
+    },
+    {
+      "code": "NV08",
+      "display_name": "Nhân viên mẫu 8",
+      "user": "demo_nv08",
+      "home_branch": "CN03",
+      "branches": [
+        "CN03",
+        "CN05"
+      ],
+      "started_on": "2023-11-10",
+      "active": true
+    },
+    {
+      "code": "NV09",
+      "display_name": "Nhân viên mẫu 9",
+      "user": "demo_nv09",
+      "home_branch": "CN03",
+      "branches": [
+        "CN03",
+        "CN05"
+      ],
+      "started_on": "2023-11-10",
+      "active": true
+    },
+    {
+      "code": "NV10",
+      "display_name": "Nhân viên mẫu 10",
+      "user": "demo_nv10",
+      "home_branch": "CN05",
+      "branches": [
+        "CN05"
+      ],
+      "started_on": "2023-11-10",
+      "active": false
+    }
+  ],
+  "evidence_types": [
+    {
+      "code": "AN_TOAN_LD",
+      "name": "Hướng dẫn an toàn lao động (mẫu)",
+      "category": "TRAINING",
+      "expiry_required": true
+    },
+    {
+      "code": "DAO_TAO_PCCC",
+      "name": "Hướng dẫn PCCC (mẫu)",
+      "category": "TRAINING",
+      "expiry_required": true
+    }
+  ],
+  "position_requirements": {
+    "PHUC_VU": [
+      "AN_TOAN_LD",
+      "DAO_TAO_PCCC"
+    ],
+    "THU_NGAN": [
+      "AN_TOAN_LD",
+      "DAO_TAO_PCCC"
+    ],
+    "PHA_CHE": [
+      "AN_TOAN_LD",
+      "DAO_TAO_PCCC"
+    ],
+    "KHO": [
+      "AN_TOAN_LD",
+      "DAO_TAO_PCCC"
+    ]
+  },
+  "evidence": [
+    {
+      "employee": "NV06",
+      "type": "GIAY_BEP",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV06-GIAY_BEP",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV06",
+      "type": "IFSG_DAU",
+      "issued_on": "2023-11-01",
+      "valid_from": "2023-11-01",
+      "valid_until": null,
+      "reference": "NV06-IFSG_DAU",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV06",
+      "type": "IFSG_NHAC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV06-IFSG_NHAC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV06",
+      "type": "AN_TOAN_LD",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV06-AN_TOAN_LD",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV06",
+      "type": "DAO_TAO_PCCC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV06-DAO_TAO_PCCC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV07",
+      "type": "GIAY_BEP",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV07-GIAY_BEP",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV07",
+      "type": "IFSG_DAU",
+      "issued_on": "2023-11-01",
+      "valid_from": "2023-11-01",
+      "valid_until": null,
+      "reference": "NV07-IFSG_DAU",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV07",
+      "type": "IFSG_NHAC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV07-IFSG_NHAC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV07",
+      "type": "AN_TOAN_LD",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV07-AN_TOAN_LD",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV07",
+      "type": "DAO_TAO_PCCC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV07-DAO_TAO_PCCC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV08",
+      "type": "GIAY_BEP",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV08-GIAY_BEP",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV08",
+      "type": "IFSG_DAU",
+      "issued_on": "2023-11-01",
+      "valid_from": "2023-11-01",
+      "valid_until": null,
+      "reference": "NV08-IFSG_DAU",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV08",
+      "type": "IFSG_NHAC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV08-IFSG_NHAC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV08",
+      "type": "AN_TOAN_LD",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV08-AN_TOAN_LD",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV08",
+      "type": "DAO_TAO_PCCC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV08-DAO_TAO_PCCC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV09",
+      "type": "GIAY_BEP",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV09-GIAY_BEP",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV09",
+      "type": "IFSG_DAU",
+      "issued_on": "2023-11-01",
+      "valid_from": "2023-11-01",
+      "valid_until": null,
+      "reference": "NV09-IFSG_DAU",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV09",
+      "type": "IFSG_NHAC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV09-IFSG_NHAC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV09",
+      "type": "AN_TOAN_LD",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV09-AN_TOAN_LD",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV09",
+      "type": "DAO_TAO_PCCC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV09-DAO_TAO_PCCC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV10",
+      "type": "GIAY_BEP",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV10-GIAY_BEP",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV10",
+      "type": "IFSG_DAU",
+      "issued_on": "2023-11-01",
+      "valid_from": "2023-11-01",
+      "valid_until": null,
+      "reference": "NV10-IFSG_DAU",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV10",
+      "type": "IFSG_NHAC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV10-IFSG_NHAC",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV10",
+      "type": "AN_TOAN_LD",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV10-AN_TOAN_LD",
+      "verified_by": "quanly03"
+    },
+    {
+      "employee": "NV10",
+      "type": "DAO_TAO_PCCC",
+      "issued_on": "2026-01-01",
+      "valid_from": "2026-01-01",
+      "valid_until": "2027-12-31",
+      "reference": "NV10-DAO_TAO_PCCC",
+      "verified_by": "quanly03"
+    }
+  ],
+  "shifts": [
+    {
+      "code": "CA_MAU_01",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-11-23T09:00:00+01:00",
+      "end_at": "2026-11-23T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_02",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-11-24T09:00:00+01:00",
+      "end_at": "2026-11-24T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_03",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-11-25T09:00:00+01:00",
+      "end_at": "2026-11-25T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_04",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-11-26T09:00:00+01:00",
+      "end_at": "2026-11-26T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_05",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-11-27T09:00:00+01:00",
+      "end_at": "2026-11-27T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_06",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-11-30T09:00:00+01:00",
+      "end_at": "2026-11-30T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_07",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-12-01T09:00:00+01:00",
+      "end_at": "2026-12-01T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_08",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-12-02T09:00:00+01:00",
+      "end_at": "2026-12-02T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_09",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-12-03T09:00:00+01:00",
+      "end_at": "2026-12-03T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_10",
+      "branch": "CN03",
+      "position": "BEP",
+      "start_at": "2026-12-04T09:00:00+01:00",
+      "end_at": "2026-12-04T13:00:00+01:00",
+      "break_start": null,
+      "break_end": null,
+      "required_count": 1,
+      "status": "PUBLISHED",
+      "published_by": "quanly03",
+      "published_at": "2026-11-19T15:30:00+01:00"
+    },
+    {
+      "code": "CA_MAU_DEM",
+      "branch": "CN04",
+      "position": "BEP",
+      "start_at": "2026-11-23T22:00:00+01:00",
+      "end_at": "2026-11-24T06:00:00+01:00",
+      "break_start": "2026-11-23T23:45:00+01:00",
+      "break_end": "2026-11-24T00:15:00+01:00",
+      "required_count": 1,
+      "status": "DRAFT",
+      "published_by": null,
+      "published_at": null
+    }
+  ],
+  "assignments": [
+    {
+      "shift": "CA_MAU_01",
+      "employee": "NV06"
+    },
+    {
+      "shift": "CA_MAU_02",
+      "employee": "NV07"
+    },
+    {
+      "shift": "CA_MAU_03",
+      "employee": "NV06"
+    },
+    {
+      "shift": "CA_MAU_04",
+      "employee": "NV07"
+    },
+    {
+      "shift": "CA_MAU_05",
+      "employee": "NV07"
+    },
+    {
+      "shift": "CA_MAU_06",
+      "employee": "NV06"
+    },
+    {
+      "shift": "CA_MAU_07",
+      "employee": "NV06"
+    },
+    {
+      "shift": "CA_MAU_08",
+      "employee": "NV07"
+    },
+    {
+      "shift": "CA_MAU_09",
+      "employee": "NV06"
+    },
+    {
+      "shift": "CA_MAU_10",
+      "employee": "NV07"
+    }
+  ],
+  "swap_requests": [
+    {
+      "code": "DOI_MAU_01",
+      "shift_a": "CA_MAU_01",
+      "shift_b": "CA_MAU_02",
+      "original_a_employee": "NV06",
+      "original_b_employee": "NV07",
+      "created_by": "demo_nv06",
+      "created_at": "2026-11-20T09:01:00+01:00",
+      "status": "PENDING",
+      "decided_by": null,
+      "decided_at": null,
+      "reason": ""
+    },
+    {
+      "code": "DOI_MAU_02",
+      "shift_a": "CA_MAU_03",
+      "shift_b": "CA_MAU_04",
+      "original_a_employee": "NV06",
+      "original_b_employee": "NV07",
+      "created_by": "demo_nv06",
+      "created_at": "2026-11-20T09:02:00+01:00",
+      "status": "PENDING",
+      "decided_by": null,
+      "decided_at": null,
+      "reason": ""
+    },
+    {
+      "code": "DOI_MAU_03",
+      "shift_a": "CA_MAU_05",
+      "shift_b": "CA_MAU_06",
+      "original_a_employee": "NV06",
+      "original_b_employee": "NV07",
+      "created_by": "demo_nv06",
+      "created_at": "2026-11-20T09:03:00+01:00",
+      "status": "APPROVED",
+      "decided_by": "quanly03",
+      "decided_at": "2026-11-20T10:03:00+01:00",
+      "reason": ""
+    },
+    {
+      "code": "DOI_MAU_04",
+      "shift_a": "CA_MAU_07",
+      "shift_b": "CA_MAU_08",
+      "original_a_employee": "NV06",
+      "original_b_employee": "NV07",
+      "created_by": "demo_nv06",
+      "created_at": "2026-11-20T09:04:00+01:00",
+      "status": "REJECTED",
+      "decided_by": "quanly03",
+      "decided_at": "2026-11-20T10:04:00+01:00",
+      "reason": "Dữ liệu mẫu: quản lý từ chối theo đề nghị nhân viên."
+    },
+    {
+      "code": "DOI_MAU_05",
+      "shift_a": "CA_MAU_09",
+      "shift_b": "CA_MAU_10",
+      "original_a_employee": "NV06",
+      "original_b_employee": "NV07",
+      "created_by": "demo_nv06",
+      "created_at": "2026-11-20T09:05:00+01:00",
+      "status": "REJECTED",
+      "decided_by": "quanly03",
+      "decided_at": "2026-11-20T10:05:00+01:00",
+      "reason": "Dữ liệu mẫu: quản lý từ chối theo đề nghị nhân viên."
+    }
+  ]
+}

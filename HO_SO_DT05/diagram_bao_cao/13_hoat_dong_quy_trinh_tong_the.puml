@@ -1,0 +1,63 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam ArrowColor #3F5264
+skinparam defaultTextAlignment center
+skinparam roundCorner 0
+skinparam usecaseBackgroundColor #EFF5F8
+skinparam usecaseBorderColor #385B70
+skinparam rectangleBorderColor #385B70
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
+|Quản lý chi nhánh|
+start
+:Chuẩn bị hồ sơ;\ntạo ca nháp;
+while (Ca thiếu người?) is (Có)
+  :Chọn nhân viên;
+  |Hệ thống|
+  :Kiểm và lưu phân công\nnếu hợp lệ (Hình 7);
+  |Quản lý chi nhánh|
+  :Xem số người / lý do;\nbổ sung dữ liệu nếu cần;
+endwhile (Không)
+:Yêu cầu công bố;
+|Hệ thống|
+:Kiểm lại toàn ca;
+if (Đạt và lưu thành công?) then (Không)
+  :Giữ DRAFT; trả lý do;
+  |Quản lý chi nhánh|
+  :Khắc phục;\nthực hiện lại sau;
+  stop
+else (Có)
+  |Hệ thống|
+  :Lưu PUBLISHED;
+endif
+|Nhân viên|
+:Xem lịch đã công bố;
+if (Muốn đổi ca?) then (Có)
+  :Chọn phân công của mình;\nnhập mã đối tác;
+  |Hệ thống|
+  :Tiếp nhận theo Hình 9;
+  if (Tạo được đơn PENDING?) then (Có)
+    |Quản lý chi nhánh|
+    :Chọn duyệt hoặc\ntừ chối có lý do;
+    |Hệ thống|
+    :Xử lý theo Hình 8;
+  else (Không)
+  endif
+  |Nhân viên|
+  :Xem kết quả và lịch;
+else (Không)
+endif
+stop
+legend bottom
+  Đăng nhập đúng vai trò trước khi thao tác.
+  Có thể lưu ca nháp để tiếp tục sau.
+  Đơn chờ / bị từ chối không đổi lịch; lỗi ghi rollback.
+endlegend
+@enduml

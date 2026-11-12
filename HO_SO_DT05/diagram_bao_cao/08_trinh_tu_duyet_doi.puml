@@ -6,40 +6,49 @@ skinparam shadowing false
 skinparam ArrowColor #3F5264
 skinparam defaultTextAlignment center
 skinparam roundCorner 0
-skinparam monochrome false
 skinparam usecaseBackgroundColor #EFF5F8
 skinparam usecaseBorderColor #385B70
 skinparam rectangleBorderColor #385B70
 skinparam componentStyle rectangle
 skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
 hide footbox
-actor "Quản lý" as QL
-boundary "Form duyệt đơn" as UI
+skinparam maxMessageSize 350
+actor "Quản lý chi nhánh" as QL
+boundary "Form xử lý đơn" as UI
 control "Dịch vụ đổi ca" as S
 database "SQL Server" as DB
-QL -> UI : Duyệt đề nghị đổi ca
-UI -> S : decide_swap(người duyệt, đơn, quyết định)
+QL -> UI : Chọn quyết định và lý do nếu từ chối
+UI -> S : decide_swap(...)
 group transaction.atomic()
-S -> DB : Khóa ScheduleGate(id=1); đọc lại quyền, đơn và hai phân công
-alt Sai quyền
- S --> UI : Từ chối truy cập
-else Đơn đã xử lý
- S --> UI : Trả kết quả đang lưu
-else Đơn đang chờ
- S -> S : So chủ gốc, kiểm hai ca tương lai;\ndựng và đánh giá lịch mới của cả hai người
- alt Không đạt
-  S --> UI : Trả lý do; giữ PENDING và hai lịch cũ
- else Đạt
-  S -> DB : Đổi hai Assignment và ghi APPROVED, người, thời điểm
-  alt Tất cả bản ghi thành công
-   S -> DB : Commit
-   S --> UI : Trả kết quả đã duyệt
-  else Lỗi trong lúc ghi
-   S -> DB : Rollback toàn bộ
-   S --> UI : Báo lỗi; giữ đơn và lịch trước giao dịch
+  S -> DB : Khóa ScheduleGate(id=1);\nđọc lại quyền, đơn và hai phân công
+  DB --> S : Dữ liệu hiện hành
+  alt Sai quyền
+    S -> S : Chuẩn bị lỗi truy cập; không ghi
+  else Đã APPROVED hoặc REJECTED
+    S -> S : Dùng kết quả đang lưu
+  else PENDING và quyết định từ chối
+    S -> S : Kiểm lý do bắt buộc; chỉ chuẩn bị\nREJECTED khi có lý do
+  else PENDING và quyết định duyệt
+    S -> S : Kiểm ca tương lai đã công bố, cùng chi nhánh,\nhai chủ gốc; dựng và kiểm lịch của cả hai người
+    alt Không đạt hoặc thiếu dữ liệu
+      S -> S : Chuẩn bị lý do; giữ PENDING và hai lịch
+    else Cả hai OK
+      S -> S : Chuẩn bị hai chủ mới và APPROVED
+    end
   end
- end
+  opt Có quyết định mới hợp lệ
+    S -> DB : Ghi hai Assignment nếu duyệt;\nghi quyết định, người, thời điểm và lý do
+    alt Ghi và commit thành công
+      S -> DB : COMMIT khi thoát atomic thành công
+    else Lỗi ghi hoặc commit
+      S -> DB : ROLLBACK toàn bộ; trả kết quả lỗi
+    end
+  end
 end
-end
-UI --> QL : Hiển thị kết quả
+S --> UI : Kết quả sau khi giao dịch kết thúc
+UI --> QL : Hiển thị kết quả trong phạm vi được xem
 @enduml

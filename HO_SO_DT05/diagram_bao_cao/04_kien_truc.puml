@@ -6,29 +6,41 @@ skinparam shadowing false
 skinparam ArrowColor #3F5264
 skinparam defaultTextAlignment center
 skinparam roundCorner 0
-skinparam monochrome false
 skinparam usecaseBackgroundColor #EFF5F8
 skinparam usecaseBorderColor #385B70
 skinparam rectangleBorderColor #385B70
 skinparam componentStyle rectangle
 skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
 top to bottom direction
 actor "Người dùng" as U
 rectangle "Trình duyệt" as Browser
 package "Ứng dụng Django · thiết kế đề xuất" {
-  component "Views / Forms\nPhiên đăng nhập · CSRF · quyền chi nhánh" as Web
-  component "Truy vấn theo quyền\nHồ sơ · lịch · trạng thái đơn" as Read
-  component "Dịch vụ ghi lịch\nPhân công · công bố · đổi ca" as Write
-  component "Quy tắc nghiệp vụ\nHồ sơ và lịch dự kiến" as Rule
+  component "Views / Forms\nSession · CSRF · quyền chi nhánh" as Web
+  component "Truy vấn theo quyền\nHồ sơ · lịch · đơn" as Read
+  component "Dịch vụ ghi\nHồ sơ · lịch · đổi ca" as Write
+  component "Quy tắc nghiệp vụ\nHồ sơ · giờ làm / nghỉ · Chủ nhật" as Rule
   component "Django ORM" as ORM
+  component "Templates\nHTML và thông báo theo quyền" as HTML
 }
 database "Microsoft SQL Server" as DB
-U -- Browser
-Browser --> Web : HTTP / HTML
+U -down- Browser
+Browser -down-> Web : HTTP / HTML
 Web --> Read : đọc
-Web --> Write : ghi
+Web --> Write : thay đổi
 Write --> Rule : đánh giá
 Read --> ORM
-Write --> ORM : giao dịch
+Rule --> ORM : đọc căn cứ
+Write --> ORM : ghi trong giao dịch
 ORM --> DB : mssql-django / ODBC
+Web -right-> HTML : dựng phản hồi
+note right of Write
+  transaction.atomic() + ScheduleGate(id=1):
+  khóa chung trước khi đọc lại điều kiện.
+  Các thao tác ghi ảnh hưởng lịch chờ nhau;
+  lựa chọn cho quy mô demo.
+end note
 @enduml

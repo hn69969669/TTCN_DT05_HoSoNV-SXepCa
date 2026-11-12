@@ -1,0 +1,52 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam ArrowColor #3F5264
+skinparam defaultTextAlignment center
+skinparam roundCorner 0
+skinparam usecaseBackgroundColor #EFF5F8
+skinparam usecaseBorderColor #385B70
+skinparam rectangleBorderColor #385B70
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
+hide footbox
+skinparam maxMessageSize 430
+actor "Nhân viên" as NV
+boundary "Form đề nghị đổi ca" as UI
+control "Dịch vụ đổi ca" as S
+database "SQL Server" as DB
+NV -> UI : Chọn phân công của mình và nhập mã đối tác
+UI -> S : request_swap(...)
+group transaction.atomic()
+  S -> DB : Khóa ScheduleGate(id=1); đọc lại hai phân công và chủ sở hữu
+  DB --> S : Dữ liệu hiện hành
+  S -> S : Kiểm sở hữu, hai ca / hai người khác nhau,\ncùng chi nhánh, ca tương lai đã công bố
+  S -> DB : Kiểm đơn PENDING trùng cặp, kể cả thứ tự đảo
+  DB --> S : Kết quả kiểm cặp
+  alt Sai quyền, dữ liệu không hợp lệ hoặc trùng cặp
+    S -> S : Chuẩn bị lý do; không tạo đơn
+  else Hợp lệ
+    S -> DB : Tạo PENDING; lưu hai phân công, hai chủ gốc,\nngười gửi và created_at; giữ nguyên Assignment
+    alt Ghi và commit thành công
+      S -> DB : COMMIT khi thoát atomic thành công
+      S -> S : Chuẩn bị kết quả đã gửi
+    else Lỗi ghi hoặc commit
+      S -> DB : ROLLBACK toàn bộ
+      S -> S : Chuẩn bị kết quả lỗi
+    end
+  end
+end
+S --> UI : Kết quả sau khi giao dịch kết thúc
+UI --> NV : Hiển thị trạng thái đơn hoặc lý do
+note over S, DB
+  Chỉ kiểm cấu trúc và quyền khi gửi.
+  Lịch dự kiến của cả hai người được đánh giá
+  trên dữ liệu mới nhất khi quản lý duyệt.
+end note
+@enduml

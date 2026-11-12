@@ -1,0 +1,50 @@
+@startuml
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam ArrowColor #3F5264
+skinparam defaultTextAlignment center
+skinparam roundCorner 0
+skinparam usecaseBackgroundColor #EFF5F8
+skinparam usecaseBorderColor #385B70
+skinparam rectangleBorderColor #385B70
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
+start
+:Nhận nhân viên, ca, lịch dự kiến sau toàn bộ thay đổi\nvà ngày đánh giá; khởi tạo danh sách vấn đề;
+:Chuẩn hóa UTC / Europe/Berlin;\nxác định các ngày thực sự làm trong ca;
+partition "Hồ sơ" {
+  :Kiểm hoạt động, quyền nhận ca tại chi nhánh;\nkiểm minh chứng theo vị trí và hiệu lực suốt ca;
+  :Ghi lỗi chắc chắn hoặc dữ liệu còn thiếu;
+}
+partition "Thời gian" {
+  :Kiểm trùng giờ ở mọi chi nhánh;\nkiểm nghỉ trước và sau ca >= 660 phút;
+  :Chia phút làm theo từng ngày địa phương;\ntrừ nghỉ đúng khoảng; kiểm <= 480 phút / ca và / ngày;
+}
+if (Thay đổi chạm Chủ nhật?) then (Có)
+  :Kiểm baseline đủ các Chủ nhật của từng năm bị tác động;\nnếu thiếu, ghi SUNDAY_DATA_MISSING;
+  :Với năm đủ dữ liệu, tính ngày nghỉ trên lịch dự kiến;\nnếu < 15, ghi SUNDAY_QUOTA;
+else (Không)
+endif
+if (Có vi phạm chắc chắn?) then (Có)
+  :Trả BLOCKED và toàn bộ vấn đề\nđược phép hiển thị, kể cả dữ liệu còn thiếu;
+else (Không)
+  if (Còn thiếu dữ liệu để đánh giá?) then (Có)
+    :Trả NEED_DATA và mục cần bổ sung;
+  else (Không)
+    :Trả OK;
+  endif
+endif
+stop
+legend bottom
+  Lịch dự kiến gồm nháp và đã công bố ở mọi chi nhánh.
+  Loại phân công đang xét trước khi thêm; đổi cả hai người trước khi kiểm.
+  Hàm chỉ đọc. Quyền người thao tác, trạng thái ca và sức chứa do dịch vụ kiểm.
+  480 phút, 660 phút, 15 Chủ nhật là ngưỡng demo Q1–Q3 chờ xác nhận.
+endlegend
+@enduml

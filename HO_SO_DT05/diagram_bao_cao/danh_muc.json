@@ -1,0 +1,93 @@
+[
+  {
+    "file": "01_use_case_tong_quan",
+    "title": "Use Case tổng quan hệ thống DT05",
+    "caption": "Khai báo nhu cầu ca và xem lịch chi nhánh được thể hiện rõ. Ba vai trò đăng nhập để sử dụng các chức năng trong phạm vi của mình.",
+    "page": "auto",
+    "trace": "YC01–YC11"
+  },
+  {
+    "file": "02_use_case_phan_cong",
+    "title": "Use Case hồ sơ, phân công và công bố ca",
+    "caption": "Quản lý ghi nhận minh chứng đã xác minh và sửa ca nháp. Phân công và công bố dùng chung việc kiểm tra điều kiện; khi sửa ca có người phải kiểm lại các phân công.",
+    "page": "auto",
+    "trace": "YC02–YC09"
+  },
+  {
+    "file": "03_use_case_doi_ca",
+    "title": "Use Case gửi và xử lý đề nghị đổi ca",
+    "caption": "Một nhân viên gửi mã phân công; quản lý duyệt hoặc từ chối. Khi duyệt, hệ thống kiểm lịch sau đổi của cả hai người.",
+    "page": "auto",
+    "trace": "YC10–YC11"
+  },
+  {
+    "file": "04_kien_truc",
+    "title": "Kiến trúc ứng dụng Django và SQL Server",
+    "caption": "Dữ liệu đi qua truy vấn theo quyền hoặc dịch vụ ghi. Khóa ScheduleGate(id=1) tuần tự hóa các thao tác ảnh hưởng lịch; Templates trả HTML cho trình duyệt.",
+    "page": "auto",
+    "trace": "CL01–CL03"
+  },
+  {
+    "file": "05_erd_ho_so",
+    "title": "ERD hồ sơ, quyền chi nhánh và minh chứng",
+    "caption": "Tên trường và khóa bám models.py. Evidence.verified_by không cho phép NULL; Employee.user là liên kết tùy chọn và duy nhất khi khác NULL. EmployeeBranch chứa cả chi nhánh chính.",
+    "page": "auto",
+    "trace": "Models hiện hành"
+  },
+  {
+    "file": "06_erd_lich",
+    "title": "ERD lịch làm việc, phân công và đơn đổi ca",
+    "caption": "Ca lưu giờ bắt đầu/kết thúc và hai đầu khoảng nghỉ. Đơn lưu chủ gốc và lịch sử quyết định. ScheduleGate là bảng kỹ thuật được thể hiện ở Hình 4.",
+    "page": "auto",
+    "trace": "Models hiện hành"
+  },
+  {
+    "file": "07_trinh_tu_phan_cong",
+    "title": "Sơ đồ tuần tự phân công nhân viên",
+    "caption": "Đọc lại điều kiện sau khi khóa chung. Thêm Assignment khi hợp lệ; nếu lỗi ghi thì rollback. Chỉ trả thành công sau commit, rồi đọc lại số người trên trang chi tiết.",
+    "page": "auto",
+    "trace": "YC06–YC08 · T01–T07, T11–T14"
+  },
+  {
+    "file": "08_trinh_tu_duyet_doi",
+    "title": "Sơ đồ tuần tự xử lý đề nghị đổi ca",
+    "caption": "Bổ sung nhánh từ chối có lý do, xử lý lặp và lỗi ghi. Chỉ nhánh duyệt đánh giá lịch mới. Đơn lỗi thời vẫn PENDING để quản lý có thể từ chối.",
+    "page": "auto",
+    "trace": "YC11 · T09–T10, T14–T15"
+  },
+  {
+    "file": "09_trinh_tu_de_nghi_doi_ca",
+    "title": "Sơ đồ tuần tự gửi đề nghị đổi ca",
+    "caption": "Dùng request_swap đúng hợp đồng. Kiểm sở hữu và hai ca cùng chi nhánh, đã công bố, chưa bắt đầu; chỉ chặn đơn chờ trùng cặp kể cả đảo thứ tự. Tạo đơn chưa đổi lịch.",
+    "page": "auto",
+    "trace": "YC10 · T09, T15"
+  },
+  {
+    "file": "10_hoat_dong_kiem_tra_quy_dinh",
+    "title": "Sơ đồ hoạt động đánh giá điều kiện phân công",
+    "caption": "Hàm evaluate_assignment chỉ đọc lịch dự kiến. Kiểm cả hồ sơ, giờ làm, nghỉ và Chủ nhật; ưu tiên BLOCKED khi có vi phạm chắc chắn, NEED_DATA khi chỉ thiếu căn cứ. Các ngưỡng là giả định demo Q1–Q3.",
+    "page": "auto",
+    "trace": "YC03–YC04, YC07–YC08 · T02–T07, T13"
+  },
+  {
+    "file": "11_trang_thai_ca",
+    "title": "Sơ đồ trạng thái ca làm việc",
+    "caption": "Chỉ có DRAFT và PUBLISHED. Công bố thất bại giữ nháp; đổi người qua hoán đổi không làm ca mất trạng thái công bố. Ca đã qua vẫn giữ trạng thái trong model.",
+    "page": "auto",
+    "trace": "YC05–YC06, YC09 · Q4"
+  },
+  {
+    "file": "12_trang_thai_don_doi_ca",
+    "title": "Sơ đồ trạng thái đề nghị đổi ca",
+    "caption": "Chỉ có PENDING, APPROVED và REJECTED. Lỗi kiểm tra hoặc lỗi giao dịch giữ dữ liệu; xử lý lặp trả quyết định đã lưu. Không tự chuyển sang trạng thái vô hiệu.",
+    "page": "auto",
+    "trace": "YC10–YC11 · T09–T10, T14–T15"
+  },
+  {
+    "file": "13_hoat_dong_quy_trinh_tong_the",
+    "title": "Sơ đồ hoạt động tổng thể theo vai trò",
+    "caption": "Ba làn quản lý, hệ thống và nhân viên. Công bố không đạt giữ ca nháp để quản lý khắc phục và thực hiện lại; chỉ sau công bố nhân viên mới xem được ca. Phần xử lý đơn tham chiếu Hình 8–9.",
+    "page": "auto",
+    "trace": "YC01–YC11"
+  }
+]

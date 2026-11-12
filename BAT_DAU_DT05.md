@@ -1,6 +1,6 @@
-# Buổi đầu của Hiệp và Chung · Làm từ số 0
+# Buổi đầu của Hiệp và Chung · Đồng bộ dự án và chuẩn bị M2
 
-**Cập nhật sau khởi tạo repo.** Khung Django và SQL Server trên máy Hiệp đã được thiết lập trong thư mục dự án. Khi lấy code hiện tại, làm theo [README của repo](README.md) để chạy hoặc cài trên máy Chung. Các bước tạo dự án phía dưới dùng để tham khảo cách khởi tạo.
+**Cập nhật sau khởi tạo repo.** Khung Django và SQL Server trên máy Hiệp đã được thiết lập trong thư mục dự án. Khi lấy code hiện tại, làm theo [README của repo](README.md) để chạy hoặc cài trên máy Chung. Repo đã có models, migration và lệnh nạp mẫu; dùng các bước dưới để đồng bộ và kiểm tra trên hai máy.
 
 **Mục tiêu cuối chiều 13/11/2026:** cả hai mở được cùng ứng dụng từ một repo, biết phần còn thiếu của M1, và gửi được bản M2 cho người hướng dẫn cùng người phụ trách nghiệp vụ. M2 đến hạn **thứ Tư 18/11**, trước buổi làm chung kế tiếp. Dùng [lộ trình đến ngày bảo vệ](./LO_TRINH_DT05.md) cho các buổi sau.
 
@@ -9,104 +9,51 @@
 | Thời gian tính từ đầu buổi | Hiệp làm gì | Chung làm gì | Dấu hiệu xong |
 |---|---|---|---|
 | 0–30 phút | Hỏi quản lý tên hai đầu mối, bài đầu vào, cách nộp bù M1 và xin 20–30 phút trao đổi DT05. | Mở trang Đề tài dòng DT05, trang Mốc, đăng ký và lịch N01. Ghi các mục đã có, còn thiếu. | Có người tiếp nhận hoặc tin nhắn chờ phản hồi, kèm thời điểm cần trả lời. |
-| 30–100 phút | Tạo repo và dự án theo mục 2. Ghi phiên bản Python và hướng dẫn chạy đầu tiên. | Kiểm tra tài khoản Git, Python và quyền vào repo. Chuẩn bị câu hỏi mục 3. | Hiệp chạy được trang đầu, Chung mở được repo bằng tài khoản của mình. |
+| 30–100 phút | Kiểm repo và lệnh nạp mẫu theo mục 2. Ghi phiên bản Python và mã commit đang dùng. | Kiểm tra tài khoản Git, Python và quyền vào repo. Chuẩn bị câu hỏi mục 3. | Hiệp chạy được trang đầu, Chung mở được repo bằng tài khoản của mình. |
 | 100–190 phút | Cùng trao đổi nghiệp vụ khi có lịch. Xin một ví dụ xếp đúng và một ví dụ phải chặn. | Ghi câu trả lời thực tế. Nếu chưa gặp được, làm sơ đồ và đánh dấu từng giả định cần hỏi. | Có biên bản thật hoặc danh sách câu hỏi đã gửi và lịch chờ. |
 | 190–240 phút | Kiểm hướng dẫn cài trên máy Chung. Gom minh chứng M1 cho cả hai. | Lấy repo về máy, mở trang đầu, thêm sơ đồ nháp và tạo commit đầu tiên của mình. | Có commit của từng người, hai máy chạy được. Mỗi người ghi một dòng nhật ký có sản phẩm hoặc vướng mắc thực tế. |
 
-Nếu buổi 12/11 đã kết thúc khi nhóm nhận kế hoạch, giữ nguyên lịch đã làm trong nhật ký. Dùng 30 phút đầu của buổi kế tiếp để liên hệ quản lý, rồi chia đôi việc: Hiệp dựng repo trong lúc Chung chuẩn bị M2. Ưu tiên gặp nghiệp vụ và gửi hồ sơ 13/11. Nếu M1 hoặc một đầu ra M2 chưa kịp, ghi rõ phần thiếu, người làm và xin thời điểm bổ sung.
+Nếu buổi 12/11 đã kết thúc khi nhóm nhận kế hoạch, giữ nguyên lịch đã làm trong nhật ký. Dùng 30 phút đầu của buổi kế tiếp để liên hệ quản lý, rồi chia đôi việc: Hiệp kiểm dữ liệu mẫu trong lúc Chung chuẩn bị M2. Ưu tiên gặp nghiệp vụ và gửi hồ sơ 13/11. Nếu M1 hoặc một đầu ra M2 chưa kịp, ghi rõ phần thiếu, người làm và xin thời điểm bổ sung.
 
 **Tin nhắn để Hiệp gửi cho quản lý chương trình**
 
 > Em chào anh/chị, nhóm N01 gồm Nguyễn Hữu Hiệp và Lê Thành Chung đã được giao DT05 “Hồ sơ nhân viên và xếp ca”. Hai bạn đã đăng ký lịch. Nhóm đang khởi tạo môi trường và cần hoàn thiện M1 đã đến hạn 11/11. Anh/chị cho nhóm xin tên người hướng dẫn, người phụ trách nghiệp vụ, bài đầu vào theo vai trò và cách nộp bổ sung M1 được không ạ? Nhóm cũng muốn hẹn 20–30 phút để xác nhận quy tắc xếp ca và phạm vi tối thiểu, dự kiến gửi bản M2 chiều 13/11 để kịp hạn 18/11. Em cảm ơn anh/chị.
 
-## 2. Tạo repo và chạy ứng dụng đầu tiên trên Windows
+## 2. Đồng bộ repo và chạy ứng dụng trên Windows
 
-Nhóm chọn SQL Server vì máy Hiệp đã có sẵn. Phương án dưới đây dùng Django 5.2, backend Microsoft `mssql-django`, driver `pyodbc` và Windows Authentication trên máy phát triển. Cần kiểm tra SQL Server thực tế và khả năng đăng nhập trước khi chạy migration. Chung cũng cần một SQL Server local có thể kết nối trên máy mình. Nếu đơn vị giao repo mẫu, dùng bộ đó và giữ mục tiêu kiểm tra trên hai máy. Bài đầu vào M1 làm theo đề đơn vị cung cấp. [Hướng dẫn backend Microsoft](https://github.com/microsoft/mssql-django)
+1. **Hiệp** gửi địa chỉ repo và mã `git rev-parse HEAD` đang dùng cho Chung. **Chung** clone repo nếu chưa có; nếu đã có, chạy `git status --short --branch`, giữ các thay đổi đang làm rồi mới `git pull --ff-only` khi thư mục sạch. Hai người kiểm cùng mã commit trước khi thử dữ liệu.
+2. **Mỗi người** cài Python 3.13, SQL Server và ODBC Driver 17 hoặc 18. Từ thư mục chứa `manage.py`, chạy script [import database](scripts/HUONG_DAN_IMPORT.md) với đúng tên instance trên máy mình:
 
-1. **Cả hai** kiểm tra bằng PowerShell: `git --version` và `py -3.12 --version`. Hướng dẫn dưới đây chọn Python 3.12 để hai máy cùng phiên bản. Nếu thiếu trình chạy, cài Python 3.12 và Git từ nguồn chính thức rồi mở lại PowerShell. Nếu tài khoản Git của công ty đã được cấp, ưu tiên tài khoản và nơi lưu repo do họ chỉ định. [Python cho Windows](https://www.python.org/downloads/windows/) · [Git cho Windows](https://git-scm.com/downloads/win)
-2. **Hiệp** tạo repo Git dùng chung tên `dt05-xep-ca`. Nếu tạo trên GitHub, chọn repo riêng tư, khởi tạo với README rồi cấp Chung quyền cộng tác. Mỗi người dùng tài khoản của mình. Sao chép địa chỉ HTTPS bằng nút **Code**. Cả hai mở PowerShell trong thư mục muốn chứa dự án, chạy `git clone DIA_CHI_REPO` và `cd dt05-xep-ca`. Thay `DIA_CHI_REPO` bằng địa chỉ vừa sao chép.
-3. **Chỉ Hiệp** tạo tệp `.gitignore` tại thư mục vừa lấy về. Mỗi dòng ghi một mục: `.venv/`, `__pycache__/`, `*.pyc`, `db.sqlite3`, `.env`. Sau đó chạy lần lượt:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\scripts\import_database.ps1 -Server '.\SQLEXPRESS'
+   ```
 
-   ~~~powershell
-   py -3.12 -m venv .venv
-   .\.venv\Scripts\python.exe -m pip install "Django>=5.2,<5.3" mssql-django pyodbc
-   .\.venv\Scripts\python.exe -m django startproject config .
-   .\.venv\Scripts\python.exe manage.py startapp lichca
-   .\.venv\Scripts\python.exe -m pip freeze | Set-Content -Encoding ascii requirements.txt
-   ~~~
+   Script tạo `.venv`, cài requirements, lưu cấu hình riêng trong `.env`, tạo database, migrate và nạp mẫu. Nếu chưa có quản trị, script yêu cầu tạo tài khoản trong terminal. Không có mật khẩu mặc định. Khi nạp lại, chọn đúng tài khoản đã dùng lần đầu; xem hướng dẫn import nếu có nhiều quản trị hoặc cần bỏ qua mẫu.
+3. **Cả hai** kiểm tra và chạy ứng dụng:
 
-   **Trước khi chạy các lệnh tiếp theo**, hoàn thành cấu hình SQL Server ở mục 2a bên dưới. Sau đó chạy:
-
-   ~~~powershell
-   .\.venv\Scripts\python.exe manage.py migrate
+   ```powershell
+   .\.venv\Scripts\python.exe -m pip check
    .\.venv\Scripts\python.exe manage.py check
+   .\.venv\Scripts\python.exe manage.py showmigrations lichca
+   .\.venv\Scripts\python.exe manage.py seed_demo --manager TEN_DANG_NHAP_LOCAL
    .\.venv\Scripts\python.exe manage.py runserver
-   ~~~
+   ```
 
-4. **Hiệp** mở `http://127.0.0.1:8000/`. Khi thấy trang chào Django, dừng máy chủ bằng **Ctrl+C**. Ghi các bước cài/chạy vào README. Chạy `git status --short`, kiểm tra chỉ mã nguồn, cấu hình dự án, README và danh sách thư viện được đưa vào commit. Chạy `git add .`, `git commit -m "Khoi tao ung dung DT05"`, `git push`. Nếu Git yêu cầu tên/email tác giả, cấu hình trong repo bằng `git config user.name "TEN_CUA_BAN"` và `git config user.email "EMAIL_GIT_CUA_BAN"`, thay giá trị bằng thông tin của mình rồi chạy lại bước commit.
-5. **Chung** ở trong repo đã clone, chạy các lệnh dưới đây sau khi Hiệp đã push. Trước `migrate`, thực hiện mục 2a trên máy Chung và đặt biến môi trường theo instance của máy đó. Hai người có database SQL Server thử riêng. Đến M3, dùng một bộ dữ liệu mẫu chung để tái tạo cùng kịch bản trên cả hai máy.
+   Thay `TEN_DANG_NHAP_LOCAL` bằng tài khoản của lần import. Lần seed này phải báo `Created 0 records`. Mở `http://127.0.0.1:8000/` và đăng nhập `http://127.0.0.1:8000/admin/`, rồi dừng bằng Ctrl+C. Admin hiện chưa đăng ký bảng nghiệp vụ; việc xem hồ sơ/ca được triển khai theo [bước tiếp theo](HO_SO_DT05/06_BUOC_TIEP_THEO.md).
+4. **Chung** rà tài liệu M2 trong [bộ hồ sơ](HO_SO_DT05/README.md). Khi có chỉnh sửa thực tế, commit đúng các file của mình rồi bàn giao cho Hiệp thử. Lưu mã commit và bằng chứng chạy của từng máy vào nhật ký; chưa có kết quả máy Chung thì ghi đang chờ xác nhận.
 
-   ~~~powershell
-   git pull
-   py -3.12 -m venv .venv
-   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-   .\.venv\Scripts\python.exe manage.py migrate
-   .\.venv\Scripts\python.exe manage.py check
-   .\.venv\Scripts\python.exe manage.py runserver
-   ~~~
+## 2a. Kiểm cấu hình SQL Server của từng máy
 
-6. **Chung** mở cùng địa chỉ localhost, dừng máy chủ, thêm sơ đồ quy trình nháp vào `docs/quy-trinh.md` rồi commit và push tệp của mình. **Hiệp** chạy `git pull` và kiểm tra đọc được sơ đồ. Lưu link hai commit và bằng chứng chạy trên hai máy vào hồ sơ M1. Ở buổi bắt đầu lập trình tính năng, thêm ứng dụng `lichca` vào `INSTALLED_APPS` trước khi tạo migration cho các bảng nghiệp vụ. [Hướng dẫn tạo dự án và ứng dụng Django](https://docs.djangoproject.com/en/5.2/intro/tutorial01/)
+- Trong SSMS, dùng tài khoản Windows đang phát triển để kết nối và ghi đúng **Server name**. Thay `.\SQLEXPRESS` trong lệnh import bằng tên đã kết nối được. SSMS là công cụ quản lý; máy vẫn cần SQL Server Database Engine đang chạy.
+- Script import nhận driver 17/18 và lưu thông số trong `.env`. Nếu cài thủ công, dùng [README](README.md) và `.env.example`; `config/settings.py` đã đọc các biến này, không cần thay khối `DATABASES`. Giữ mật khẩu, khóa ứng dụng và database ngoài Git.
+- Nếu cần kiểm driver sau khi tạo `.venv`, chạy:
 
-**Nếu vướng ở bước này.** Nếu Chung nhận lỗi quyền Git, kiểm tra đã chấp nhận lời mời và đang dùng đúng tài khoản. Nếu báo thiếu Django, kiểm tra đang dùng đúng `.venv\Scripts\python.exe` trong thư mục có `manage.py`. Nếu cổng 8000 đang bận, chạy `.\.venv\Scripts\python.exe manage.py runserver 8001` rồi mở cổng 8001. Ghi đúng lỗi còn mở để người hướng dẫn hỗ trợ.
+  ```powershell
+  .\.venv\Scripts\python.exe -c "import pyodbc; print(pyodbc.drivers())"
+  ```
 
-## 2a. Cấu hình SQL Server trước khi chạy migration
-
-1. Mở SSMS, kết nối bằng **Windows Authentication** vào instance đang dùng. Ghi lại nguyên văn **Server name** đã kết nối thành công. Các giá trị thường gặp là `localhost`, `.\SQLEXPRESS` hoặc `(localdb)\MSSQLLocalDB`. Chọn đúng tên trên máy. SSMS là công cụ quản lý, bước kết nối thành công giúp xác nhận database engine đã sẵn sàng.
-2. Trong SSMS, mở **New Query**, chạy lệnh sau một lần để tạo database dự án mới. Nếu tài khoản bị từ chối quyền tạo, nhờ người quản trị tạo `DT05_Dev` và cấp quyền phù hợp cho tài khoản Windows đang phát triển.
-
-   ~~~sql
-   IF DB_ID(N'DT05_Dev') IS NULL
-       CREATE DATABASE DT05_Dev;
-   ~~~
-
-3. Trong PowerShell, sau bước cài thư viện Python, xem danh sách driver bằng:
-
-   ~~~powershell
-   .\.venv\Scripts\python.exe -c "import pyodbc; print(pyodbc.drivers())"
-   ~~~
-
-   Dùng **ODBC Driver 18 for SQL Server** nếu có. Nếu máy đã có Driver 17, đặt đúng tên đó ở bước tiếp theo. Nếu thiếu cả hai, cài Microsoft ODBC Driver 18 rồi kiểm tra lại danh sách. [Tải driver từ Microsoft](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)
-4. Trong cùng cửa sổ PowerShell dùng để chạy dự án, đặt hai biến sau. Thay giá trị bằng server và driver vừa kiểm tra. Ví dụ này dành cho instance SQLEXPRESS trên máy local:
-
-   ~~~powershell
-   $env:DT05_SQL_HOST = '.\SQLEXPRESS'
-   $env:DT05_SQL_DRIVER = 'ODBC Driver 18 for SQL Server'
-   ~~~
-
-5. Hiệp sửa `config/settings.py`, thêm `import os` và thay khối `DATABASES` bằng khối dưới. Chung lấy cấu hình đó từ repo và dùng biến môi trường riêng của mình.
-
-   ~~~python
-   import os
-
-   DATABASES = {
-       "default": {
-           "ENGINE": "mssql",
-           "NAME": "DT05_Dev",
-           "HOST": os.environ["DT05_SQL_HOST"],
-           "PORT": "",
-           "OPTIONS": {
-               "python_driver": "pyodbc",
-               "driver": os.environ["DT05_SQL_DRIVER"],
-               "extra_params": "Encrypt=yes;TrustServerCertificate=yes",
-           },
-       }
-   }
-   ~~~
-
-   Cấu hình dùng danh tính Windows của tiến trình Python. `TrustServerCertificate=yes` dành cho môi trường SQL Server local của bài thực tập. Khi triển khai máy chủ dùng chung, cấu hình chứng chỉ và xác thực theo môi trường đó. Nếu SSMS chỉ kết nối được bằng SQL Authentication, cần điều chỉnh `USER`/`PASSWORD` qua biến môi trường trước khi chạy.
-6. Quay về bước `manage.py migrate`, sau đó chạy `manage.py check` và `manage.py runserver`. Kiểm tra SSMS thấy các bảng như `django_migrations` và `auth_user` trong `DT05_Dev`. Chạy lại `migrate` sẽ dùng trạng thái migration đã lưu. Mỗi lần mở PowerShell mới, đặt lại hai biến trước khi chạy lệnh Django. Ghi các bước và driver đã dùng vào README.
-
-Nếu báo thiếu `DT05_SQL_HOST`, đặt lại biến trong chính cửa sổ đang chạy. Nếu kết nối thất bại, thử cùng tên server và tài khoản Windows trong SSMS để xác định lỗi nằm ở instance, quyền truy cập hay cấu hình ứng dụng.
+- Nếu lỗi kết nối, thử cùng instance và tài khoản trong SSMS; kiểm dịch vụ SQL Server, tên server trong `.env` và driver đã cài. Nếu thiếu quyền tạo database, nhờ quản trị tạo `DT05_Dev` và cấp quyền migration. Không đổi cấu hình máy khác để khớp máy Hiệp.
+- Nếu cổng 8000 bận, chạy `.\.venv\Scripts\python.exe manage.py runserver 8001` rồi mở cổng 8001. Ghi lỗi và thao tác tái hiện khi cần hỗ trợ.
 
 ## 3. Cuộc hẹn nghiệp vụ 20–30 phút
 

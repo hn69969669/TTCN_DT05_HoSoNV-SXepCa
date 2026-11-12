@@ -2,7 +2,7 @@
 
 **Kết quả cần đạt ở bước kế tiếp** là hai máy chạy được cùng phiên bản, có cùng bộ dữ liệu thử và quản lý mở được CA01 để xem hồ sơ của người dự kiến nhận ca. Sau đó nhóm nối thao tác chọn NV02 → nhận lý do giấy hết hạn → chọn NV01 → lưu được phân công đầu tiên.
 
-Phiên bản hiện tại đã có Django, SQL Server, 13 models nghiệp vụ, migration và lệnh seed_demo. Database trên máy Hiệp có một tài khoản quản trị. Hiệp kiểm tra lệnh nạp trên hai máy. Chung tiếp tục phần đăng ký bảng nghiệp vụ trong Admin, màn hình nhân sự và dịch vụ phân ca cùng Hiệp. Trạng thái này được ghi ngày 12/11/2026.
+Phiên bản hiện tại đã có Django, SQL Server, 12 models nghiệp vụ cùng model khóa kỹ thuật `ScheduleGate`, migration và lệnh seed_demo. Database trên máy Hiệp có một tài khoản quản trị. Hiệp kiểm tra lệnh nạp trên hai máy. Chung tiếp tục phần đăng ký bảng nghiệp vụ trong Admin, màn hình nhân sự và dịch vụ phân ca cùng Hiệp. Trạng thái này được ghi ngày 12/11/2026.
 
 ## 1. Đồng bộ hai máy trước khi chia code
 
@@ -35,7 +35,7 @@ Các phần có thể triển khai trước gồm danh mục, nhập hồ sơ, h
 
 ## 3. Hiệp kiểm tra lệnh nạp bộ mẫu
 
-Lệnh đã có trong lichca/management/commands/seed_demo.py, đọc [du_lieu_mau.json](du_lieu_mau.json). Thực hiện theo [hướng dẫn import trên máy mới](../scripts/HUONG_DAN_IMPORT.md), sau đó chạy:
+Lệnh đã có trong lichca/management/commands/seed_demo.py, đọc [du_lieu_mau.json](du_lieu_mau.json). Script [import trên máy mới](../scripts/HUONG_DAN_IMPORT.md) đã tự nạp mẫu. Để kiểm khả năng chạy lặp, dùng lại đúng tài khoản của lần import:
 
 ```powershell
 .\.venv\Scripts\python.exe manage.py seed_demo --manager TEN_DANG_NHAP_LOCAL
@@ -59,7 +59,7 @@ Tham số manager trỏ đến tài khoản đang có trên máy. Lệnh phải 
 
 ## 4. Chung dựng màn hình đọc dữ liệu
 
-Trong lúc Hiệp viết lệnh nạp, **Chung** làm ba việc theo thứ tự.
+Trong lúc Hiệp kiểm tra lệnh nạp hiện có, **Chung** làm ba việc theo thứ tự.
 
 1. Đăng ký các bảng nghiệp vụ ở lichca/admin.py với chế độ chỉ xem để hai bạn đối chiếu dữ liệu nạp. Hiện các cột mã, tên, ngày hiệu lực và trạng thái, có ô tìm mã nhân viên và mã ca. Các thao tác sửa lịch sẽ đi qua dịch vụ được thiết kế ở bước 5.
 2. Tạo trang /nhan-su/ và /nhan-su/{id}/ để quản lý xem nhân viên, nơi được làm và minh chứng. Dùng quan hệ ManagerBranch, home_branch và EmployeeBranch đúng phạm vi trong thiết kế. Kiểm quyền ở máy chủ khi người dùng thay ID trên đường dẫn.
@@ -84,14 +84,14 @@ Khi chạy bước A/B, nhóm trình bày rõ các quy tắc đang phát triển
 
 ## 6. Chia nhánh và bàn giao
 
-Hiệp dùng nhánh feature/du-lieu-mau, Chung dùng feature/nhan-su-va-ca từ cùng main. Mỗi thay đổi ghi file đã sửa, cách chạy thử và kết quả. Khi nhánh làm xong một phần có thể thử, đưa lên repo để bạn còn lại kiểm tra trước khi gộp vào main.
+Hiệp dùng nhánh `codex/kiem-tra-du-lieu-mau`, Chung dùng `codex/nhan-su-va-ca` từ cùng main. Mỗi thay đổi ghi file đã sửa, cách chạy thử và kết quả. Khi nhánh làm xong một phần có thể thử, đưa lên repo để bạn còn lại kiểm tra trước khi gộp vào main.
 
 Ví dụ với nhánh của Hiệp:
 
 ```powershell
 git switch main
 git pull --ff-only
-git switch -c feature/du-lieu-mau
+git switch -c codex/kiem-tra-du-lieu-mau
 ```
 
 Trước khi bàn giao phần code:

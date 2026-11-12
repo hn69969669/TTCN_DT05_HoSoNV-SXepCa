@@ -6,28 +6,48 @@ skinparam shadowing false
 skinparam ArrowColor #3F5264
 skinparam defaultTextAlignment center
 skinparam roundCorner 0
-skinparam monochrome false
 skinparam usecaseBackgroundColor #EFF5F8
 skinparam usecaseBorderColor #385B70
 skinparam rectangleBorderColor #385B70
 skinparam componentStyle rectangle
 skinparam classAttributeIconSize 0
+skinparam activityBackgroundColor #EFF5F8
+skinparam activityBorderColor #385B70
+skinparam stateBackgroundColor #EFF5F8
+skinparam stateBorderColor #385B70
 hide footbox
-actor "Quản lý" as QL
+skinparam maxMessageSize 430
+actor "Quản lý chi nhánh" as QL
 boundary "Form phân công" as UI
 control "Dịch vụ xếp ca" as S
 database "SQL Server" as DB
 QL -> UI : Chọn nhân viên và ca
-UI -> S : assign_employee(người thao tác, ca, nhân viên)
+UI -> S : assign_employee(...)
 group transaction.atomic()
-S -> DB : Khóa ScheduleGate(id=1); đọc lại quyền, ca, hồ sơ và lịch
-S -> S : Kiểm quyền, trạng thái nháp, sức chứa\nvà evaluate_assignment trên lịch dự kiến
-alt Đủ điều kiện
-  S -> DB : Tạo Assignment; commit
-  S --> UI : Số người đã xếp / số cần
-else Bị chặn hoặc thiếu dữ liệu
-  S --> UI : Trả lý do; giữ nguyên phân công
+  S -> DB : Khóa ScheduleGate(id=1); đọc lại quyền, ca, hồ sơ và lịch
+  DB --> S : Dữ liệu hiện hành
+  alt Sai quyền, ca không nháp, trùng người hoặc hết chỗ
+    S -> S : Chuẩn bị kết quả từ chối
+  else Kiểm tra sơ bộ đạt
+    S -> S : evaluate_assignment trên lịch dự kiến\n(hồ sơ suốt ca; trùng giờ; nghỉ; tổng giờ; Chủ nhật)
+    alt OK
+      S -> DB : Tạo Assignment và đếm lại số phân công
+      alt Ghi và commit thành công
+        S -> DB : COMMIT khi thoát atomic thành công
+        S -> S : Chuẩn bị kết quả thành công
+      else Lỗi ghi hoặc commit
+        S -> DB : ROLLBACK toàn bộ
+        S -> S : Chuẩn bị kết quả lỗi
+      end
+    else BLOCKED hoặc NEED_DATA
+      S -> S : Chuẩn bị danh sách lý do; không ghi phân công
+    end
+  end
 end
-end
-UI --> QL : Hiển thị kết quả trong phạm vi được xem
+S --> UI : Kết quả sau khi giao dịch kết thúc
+UI --> QL : Hiển thị lý do hoặc chuyển về chi tiết ca\nđể đọc lại số người từ DB
+note over S, DB
+  Không báo thành công trước commit.
+  Kết thúc nhánh không ghi vẫn giải phóng khóa.
+end note
 @enduml

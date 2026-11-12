@@ -35,7 +35,7 @@ Cả hai đăng ký **chiều thứ Năm tại văn phòng, sáng và chiều th
 | M5 · Kiểm thử và bàn giao | **Chiều 11/12** gửi gói bàn giao | **15/12, thứ Ba** | Báo cáo kiểm thử, hướng dẫn cài đặt và sử dụng. Kiểm thử viên và người hướng dẫn duyệt. |
 | M6 · Báo cáo | **17/12** tổng duyệt, xác nhận giờ trình bày | **18/12, thứ Sáu** | Trình bày sản phẩm 15 phút xuyên suốt quy trình cho ban lãnh đạo và nộp báo cáo thực tập theo mẫu trường. |
 
-M1 đang ghi “Chưa bắt đầu” ở trang **Tiến độ**. Trang nhật ký đã có một dòng làm quen ngày 05/11 của Hiệp. Hai bạn cho biết chưa có repo, công nghệ hay sản phẩm để kế thừa. Hãy dùng kết quả có thật để đối chiếu với người hướng dẫn. Chỉ người hướng dẫn cập nhật hoàn thành. Hai ô người hướng dẫn và phụ trách nghiệp vụ của N01 còn trống tại thời điểm đọc bảng.
+Ở lần đọc bảng để lập kế hoạch, M1 ghi “Chưa bắt đầu”, nhật ký có một dòng làm quen ngày 05/11 của Hiệp và hai bạn chưa có repo để kế thừa. Hiện repo đã có khung Django, models, migration và lệnh nạp mẫu; trạng thái M1 trên bảng chương trình cần người hướng dẫn xác nhận lại. Hãy dùng kết quả có thật để đối chiếu với người hướng dẫn. Chỉ người hướng dẫn cập nhật hoàn thành. Hai ô người hướng dẫn và phụ trách nghiệp vụ của N01 còn trống tại thời điểm đọc bảng.
 
 ## 3. Giao việc theo từng buổi
 

@@ -3,6 +3,8 @@ param(
     [string]$Database,
     [string]$Driver,
     [switch]$SeedDemo,
+    [switch]$SkipSeed,
+    [switch]$BasicDemo,
     [string]$Manager
 )
 
@@ -10,6 +12,9 @@ $ErrorActionPreference = "Stop"
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Push-Location $projectRoot
 try {
+    if ($SeedDemo -and $SkipSeed) { throw "Use either -SeedDemo or -SkipSeed, not both." }
+    if ($SkipSeed -and $Manager) { throw "-Manager cannot be used with -SkipSeed." }
+    if ($SkipSeed -and $BasicDemo) { throw "-BasicDemo cannot be used with -SkipSeed." }
     $pythonExe = Join-Path $projectRoot ".venv\Scripts\python.exe"
     if (-not (Test-Path -LiteralPath $pythonExe)) {
         & py -3.13 -m venv .venv
@@ -23,7 +28,8 @@ try {
     if ($Server) { $setupArgs += @("--server", $Server) }
     if ($Database) { $setupArgs += @("--database", $Database) }
     if ($Driver) { $setupArgs += @("--driver", $Driver) }
-    if ($SeedDemo) { $setupArgs += "--seed-demo" }
+    if ($SkipSeed) { $setupArgs += "--no-seed-demo" }
+    if ($BasicDemo) { $setupArgs += "--basic-demo" }
     if ($Manager) { $setupArgs += @("--manager", $Manager) }
     & $pythonExe @setupArgs
     if ($LASTEXITCODE -ne 0) { throw "Database import failed. See the error above." }

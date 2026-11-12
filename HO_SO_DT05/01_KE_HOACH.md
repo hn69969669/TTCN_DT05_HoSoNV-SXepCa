@@ -10,7 +10,7 @@ Từ chiều 12/11 đến 18/12 có 18 buổi đã đăng ký, mỗi buổi 4 gi
 |---|---|---|---|---|---:|
 | P1. Môi trường và bổ sung M1 | Rà 12/11 / M1 đã đến hạn 11/11 | Hiệp tạo repo, Chung cài máy hai | Có đầu mối giao bài đầu vào cho từng người | Cả hai chạy migration trên SQL Server của mình, có minh chứng cá nhân. Xin xác nhận cách bổ sung bài M1. | 8 |
 | P2. Khảo sát và M2 | Gửi 13/11 / 18/11 | Chung ghi biên bản, Hiệp chạy ví dụ | Gặp hoặc nhận phản hồi từ nghiệp vụ | Hai người duyệt nhận sơ đồ, bộ mẫu, đặc tả, biên bản thật và phạm vi. Lưu phiên bản cùng ý kiến. | 12 |
-| P3. Tạo dữ liệu nền | 19–20/11 | Hiệp tạo models, Chung nhập và xem hồ sơ | P1, danh mục và trường dữ liệu ở P2 | Migrate trên hai máy, nạp mẫu hai lần cho cùng kết quả. Quản lý A chỉ xem được hồ sơ thuộc phạm vi. | 12 |
+| P3. Tạo dữ liệu nền | 19–20/11 | Hiệp kiểm models/seed hiện có, Chung nhập và xem hồ sơ | P1, danh mục và trường dữ liệu ở P2 | Migrate trên hai máy, nạp mẫu hai lần cho cùng kết quả. Quản lý A chỉ xem được hồ sơ thuộc phạm vi. | 12 |
 | P4. Phân ca có kiểm tra | 20–26/11 | Hiệp viết quy tắc, Chung nối màn hình | P3 và chính sách demo | CA01 chặn NV02, nhận NV01, số chỗ còn thiếu cập nhật sau khi tải lại. Có ví dụ biên cho ba nhóm quy tắc giờ, nghỉ, Chủ nhật. | 20 |
 | P5. Công bố và giữa kỳ | Tổng duyệt 26/11 / M3 ngày 27/11 | Chung viết lịch cá nhân, Hiệp kiểm lại điều kiện công bố | P4 | Chạy lần lượt T01, T02, T08. Mỗi người trình bày một thao tác do mình làm và cách biết kết quả đúng. | 10 |
 | P6. Đổi ca trọn luồng | 27/11–03/12 | Chung viết đơn và trang duyệt, Hiệp viết giao dịch đổi | P4, P5, xác nhận cách đổi | Duyệt đổi cập nhật cả hai lịch. Bấm lần hai và trường hợp hồ sơ vừa hết hạn đều bảo toàn dữ liệu. | 16 |
@@ -20,7 +20,7 @@ Từ chiều 12/11 đến 18/12 có 18 buổi đã đăng ký, mỗi buổi 4 gi
 
 ### Buổi triển khai đầu tiên sau khi chốt phạm vi
 
-1. **Hiệp** tạo các bảng chi nhánh, vị trí, nhân viên, điều kiện và hồ sơ trước. Tạo CA01 cùng 5 nhân viên từ dữ liệu mẫu. Đưa migration, lệnh nạp mẫu và kết quả mong đợi vào cùng thay đổi.
+1. **Hiệp** kiểm models, migration và lệnh `seed_demo` đã có; đối chiếu CA01 cùng 5 nhân viên từ dữ liệu mẫu. Chạy nạp lặp và thử rollback trên database thử riêng. Chỉ thêm migration khi schema thực sự thay đổi theo quyết định M2.
 2. **Chung** dựng trang ca với dữ liệu mẫu theo hợp đồng trong thiết kế. Thử với người quản lý CN01 và một tài khoản nhân viên. Hai người thống nhất ngay câu chữ khi NV02 hết hạn giấy.
 3. **Hai người** nối nút thêm người vào cùng hàm phân công. Chung chọn NV02 rồi NV01. Hiệp kiểm tra trực tiếp số bản ghi sau từng lần và đối chiếu trạng thái hiển thị sau khi tải lại. Ghi kết quả và phiên bản Git vào nhật ký.
 4. **Buổi kế tiếp** triển khai từng quy tắc giờ/nghỉ và dữ liệu Chủ nhật trước khi mở chức năng công bố. Khi đổi một quyết định M2, cập nhật đồng thời hàng yêu cầu, hàm kiểm tra và ví dụ nghiệm thu chịu ảnh hưởng.
